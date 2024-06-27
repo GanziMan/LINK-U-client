@@ -116,7 +116,7 @@ const AccountWrapper = styled(Box)(() => {
     justifyContent: "space-between",
     padding: "0px 8px",
     alignItems: "center",
-    fontSize: "12px",
+    fontSize: "11px",
     background: "#F3F3F1",
     width: 78,
     height: 28,

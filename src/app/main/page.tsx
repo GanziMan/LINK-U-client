@@ -1,9 +1,12 @@
 "use client";
 import CommonAccordion from "@/components/Accordion";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
 import { Box, styled } from "@mui/material";
+import JSConfetti from 'js-confetti';
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export interface AccountInfoType {
   position: string;
@@ -49,10 +52,35 @@ export default function Page() {
       accountInfo: "카카오뱅크 0000-11-000000",
     },
   ];
+  
+  const [confetti, setConfetti] = useState<JSConfetti | null>(null);
+
+  const handleClick = () => {
+    const jsConfetti = new JSConfetti();
+    setConfetti(jsConfetti);
+      jsConfetti.addConfetti({
+        confettiColors: [
+          "#CAB0FF"
+        ],
+        confettiNumber: 500,
+      });
+  };
+
+
+  const copyUrlToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('URL이 클립보드에 복사되었습니다!');
+    } catch (err) {
+      console.error('URL 복사 실패:', err);
+      alert('URL 복사에 실패했습니다.');
+    }
+  };
   return (
     <InvitaionContainer>
       <InvitaionWrapper>
         <WeddingImageWrapper>
+        <BackgroundMusic />
           <Image
             src={"/images/icons/wedding-icon.svg"}
             alt=""
@@ -171,10 +199,13 @@ export default function Page() {
           </Box>
         </Box>
         <ShareBox>
+          <Image alt ="" src={"/images/icons/heart-icon.svg"} onClick={() => handleClick()} style={{cursor:"pointer"}} width={100} height={100}/>
           <ShareButton background="#FFE39B">카카오톡으로 공유하기</ShareButton>
-          <ShareButton background="#EEE">url 링크 복사하기</ShareButton>
+          <ShareButton background="#EEE" onClick={() => copyUrlToClipboard()}>url 링크 복사하기</ShareButton>
         </ShareBox>
+      
       </InvitaionWrapper>
+  
     </InvitaionContainer>
   );
 }
@@ -182,8 +213,6 @@ export default function Page() {
 const InvitaionContainer = styled(Box)(() => {
   return {
     width: "100%",
-
-    // height: "100vh",
     color: "#594739",
     background: "#f1e0ce",
     display: "flex",
@@ -310,6 +339,7 @@ const ShareBox = styled(Box)(() => {
   return {
     display: "flex",
     flexDirection: "column",
+    alignItems:"center",
     gap: "10px",
   };
 });
