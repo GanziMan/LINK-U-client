@@ -6,7 +6,8 @@ import CommonSwiper from "@/components/Swiper";
 import { Box, styled } from "@mui/material";
 import JSConfetti from 'js-confetti';
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { motion } from 'framer-motion';
 
 export interface AccountInfoType {
   position: string;
@@ -15,9 +16,6 @@ export interface AccountInfoType {
 }
 
 export default function Page() {
-  //hedaer
-  //body
-  //bottom
   const GroomAccountInfo: AccountInfoType[] = [
     {
       position: "신랑",
@@ -58,14 +56,11 @@ export default function Page() {
   const handleClick = () => {
     const jsConfetti = new JSConfetti();
     setConfetti(jsConfetti);
-      jsConfetti.addConfetti({
-        confettiColors: [
-          "#CAB0FF"
-        ],
-        confettiNumber: 500,
-      });
+    jsConfetti.addConfetti({
+      confettiColors: ["#CAB0FF"],
+      confettiNumber: 500,
+    });
   };
-
 
   const copyUrlToClipboard = async () => {
     try {
@@ -76,37 +71,80 @@ export default function Page() {
       alert('URL 복사에 실패했습니다.');
     }
   };
+
   return (
     <InvitaionContainer>
       <InvitaionWrapper>
-        <WeddingImageWrapper>
-        <BackgroundMusic />
+   
+      <MotionBox
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+
+      <BackgroundMusic />
+      <WeddingImageWrapper>
+      <Image
+        src="/images/icons/wedding-icon.svg"
+        alt=""
+        width={81}
+        height={81}
+      />
+      <WeddingImageText>Wedding Invitation</WeddingImageText>
+      </WeddingImageWrapper>
+    </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <InviteText>
+          <strong>도현이</strong>와 <strong>호영이</strong>의 결혼식에 소중한 분들을 초대합니다.
+        </InviteText> </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          25.02.15.SAT
+        </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Image src={"/images/image/gay.jpeg"} alt="" width={328} height={328} />
+        </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+        >
           <Image
-            src={"/images/icons/wedding-icon.svg"}
+            src={"/images/image/greeting.jpg"}
             alt=""
-            width={81}
-            height={81}
+            width={128}
+            height={128}
           />
-          <WeddingImageText>Wedding Invitation</WeddingImageText>
-        </WeddingImageWrapper>
-        <InviteText>
-          도현이와 호영이의 결혼식에 소중한 분들을 초대합니다.
-        </InviteText>
-        <InviteDay>25.02.15.SAT</InviteDay>
-        <Image src={"/images/image/gay.jpeg"} alt="" width={328} height={328} />
-        <Image
-          src={"/images/image/greeting.jpg"}
-          alt=""
-          width={128}
-          height={128}
-        />
+        </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1 }}
+        >
         <LocationText>
           저희 두 사람, 하나가 되어 평생을 함께 걸어 가고자 합니다. 자리에
           오셔서 새로운 시작을 축복해 주세요.
         </LocationText>
+        </MotionBox>
 
         <DivideLine />
-        <ParentText>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
+        >
+          <ParentText>
           <Box>
             정이름 &bull; 김명래 의 아들 <strong>호영</strong>
           </Box>
@@ -114,21 +152,39 @@ export default function Page() {
             김동욱 &bull; 김명숙 의 딸 <strong>도현</strong>
           </Box>
         </ParentText>
+        </MotionBox>
         <DivideLine />
-        <LocationText>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.4 }}
+        >
+         <LocationText>
           2025년 2월 15일 토요일 오후 12시 파주 통돼지 바베큐집
         </LocationText>
-        <Image
-          src={"/images/icons/champagne-icon.svg"}
-          alt=""
-          width={50}
-          height={50}
-          style={{
-            marginLeft: "auto",
-          }}
-        />
+         </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.6 }}
+        >
+          <Image
+            src={"/images/icons/champagne-icon.svg"}
+            alt=""
+            width={50}
+            height={50}
+            style={{
+              marginLeft: "auto",
+            }}
+          />
+        </MotionBox>
         <CommonSwiper />
-        <AccountBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.8 }}
+        >
+          <AccountBox>
           <Image
             src={"/images/icons/dove-icon.svg"}
             alt=""
@@ -136,7 +192,8 @@ export default function Page() {
             height={70}
           />
           <AccountBoxText>마음 전하실 곳</AccountBoxText>
-        </AccountBox>
+          </AccountBox>
+        </MotionBox>
         <CommonAccordion
           AccountInfo={GroomAccountInfo}
           backgroundColor={"rgb(240, 243, 246)"}
@@ -147,7 +204,11 @@ export default function Page() {
           backgroundColor={"rgb(255, 245, 218)"}
           isMale="신부측"
         />
-        <AccountBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2 }}
+        >
           <Image
             src={"/images/icons/location-icon.svg"}
             alt=""
@@ -155,9 +216,14 @@ export default function Page() {
             height={70}
           />
           <AccountBoxText>오시는 길</AccountBoxText>
-        </AccountBox>
+        </MotionBox>
 
-        <Box textAlign={"center"}>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.2 }}
+          textAlign={"center"}
+        >
           <Box
             sx={{
               fontSize: "18px",
@@ -171,41 +237,59 @@ export default function Page() {
           <Box
             sx={{
               fontSize: "14px",
-
               lineHeight: "26px",
             }}
           >
             (파주시 금촌로 16가길 889)
           </Box>
-        </Box>
+        </MotionBox>
         <KakaoMap />
         <KakaoMapButton>카카오맵에서 보기</KakaoMapButton>
-        <Box marginRight={"auto"}>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.4 }}
+          marginRight={"auto"}
+        >
           <GuideBox>주차안내</GuideBox>
           <Box color={"#594739"}> 파주 통돼지집 내 주차장 이용</Box>
           <Box color={"#7A3D0C"}>
             * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
           </Box>
-        </Box>
-        <Box marginRight={"auto"}>
+        </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.6 }}
+          marginRight={"auto"}
+        >
           <GuideBox>지하철</GuideBox>
           <Box color={"#594739"}>[3호선] 풍산역 2번,3번 출구에서 도보 10분</Box>
-        </Box>
-        <Box marginRight={"auto"}>
+        </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.8 }}
+          marginRight={"auto"}
+        >
           <GuideBox>버스</GuideBox>
           <Box color={"#594739"}>
             파주중학교 또는 일진공원 하차 후 도보 5분 - 간선 141번, 지선 2011번,
             직행 3600번
           </Box>
-        </Box>
-        <ShareBox>
-          <Image alt ="" src={"/images/icons/heart-icon.svg"} onClick={() => handleClick()} style={{cursor:"pointer"}} width={100} height={100}/>
-          <ShareButton background="#FFE39B">카카오톡으로 공유하기</ShareButton>
-          <ShareButton background="#EEE" onClick={() => copyUrlToClipboard()}>url 링크 복사하기</ShareButton>
-        </ShareBox>
-      
+        </MotionBox>
+        <MotionBox
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 3 }}
+        >
+          <ShareBox>
+            <Image alt ="" src={"/images/icons/heart-icon.svg"} onClick={() => handleClick()} style={{cursor:"pointer"}} width={100} height={100}/>
+            <ShareButton background="#FFE39B">카카오톡으로 공유하기</ShareButton>
+            <ShareButton background="#EEE" onClick={() => copyUrlToClipboard()}>url 링크 복사하기</ShareButton>
+          </ShareBox>
+        </MotionBox>
       </InvitaionWrapper>
-  
     </InvitaionContainer>
   );
 }
@@ -254,7 +338,7 @@ const InviteText = styled(Box)(() => {
     width: 203,
     wordBreak: "keep-all",
     whiteSpace: "pre-line",
-    fontSize: "18px",
+    fontSize: "16px",
     lineHeight: "30px",
     textAlign: "center",
   };
@@ -287,9 +371,10 @@ const ParentText = styled(Box)(() => {
 
 const LocationText = styled(Box)(() => {
   return {
-    fontSize: "18px",
+    fontSize: "14px",
     lineHeight: "30px",
     width: 225,
+    fontWeight:600,
     textAlign: "center",
     whiteSpace: "pre-line",
     wordBreak: "keep-all",
@@ -359,3 +444,6 @@ const ShareButton = styled(Box)(({ background }: { background: string }) => {
     fontWeight: 600,
   };
 });
+
+// motion으로 감싸는 컴포넌트를 생성합니다.
+const MotionBox = motion(Box);

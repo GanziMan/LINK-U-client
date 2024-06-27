@@ -1,6 +1,5 @@
 "use client";
 import CommonAccordion from "@/components/Accordion";
-import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
 import { Box, styled } from "@mui/material";
@@ -80,7 +79,6 @@ export default function Page() {
     <InvitaionContainer>
       <InvitaionWrapper>
         <WeddingImageWrapper>
-        <BackgroundMusic />
           <Image
             src={"/images/icons/wedding-icon.svg"}
             alt=""
@@ -106,6 +104,7 @@ export default function Page() {
         </LocationText>
 
         <DivideLine />
+
         <ParentText>
           <Box>
             정이름 &bull; 김명래 의 아들 <strong>호영</strong>
@@ -114,10 +113,13 @@ export default function Page() {
             김동욱 &bull; 김명숙 의 딸 <strong>도현</strong>
           </Box>
         </ParentText>
+
         <DivideLine />
+        
         <LocationText>
           2025년 2월 15일 토요일 오후 12시 파주 통돼지 바베큐집
         </LocationText>
+
         <Image
           src={"/images/icons/champagne-icon.svg"}
           alt=""
@@ -203,9 +205,8 @@ export default function Page() {
           <ShareButton background="#FFE39B">카카오톡으로 공유하기</ShareButton>
           <ShareButton background="#EEE" onClick={() => copyUrlToClipboard()}>url 링크 복사하기</ShareButton>
         </ShareBox>
-      
       </InvitaionWrapper>
-  
+      {/* <BackgroundMusic /> */}
     </InvitaionContainer>
   );
 }
