@@ -5,9 +5,7 @@ import ReactCanvasConfetti from 'react-canvas-confetti';
 export default function CommonConfetti() {
     const refAnimationInstance = useRef<any>();
 
-    const getInstance = (instance:any ) => {
-      refAnimationInstance.current = instance;
-    };
+   
   
     const makeShot = (angle:any, originX:any) => {
       refAnimationInstance!.current({
@@ -24,7 +22,7 @@ export default function CommonConfetti() {
     };
   return(
     <Box>
-        <ReactCanvasConfetti refConfetti={getInstance} style={{ position: 'fixed', width: '100%', height: '100%' }} />
+        <ReactCanvasConfetti  style={{ position: 'fixed', width: '100%', height: '100%' }} />
         <button onClick={fire}>Fire Confetti</button>
     </Box>
   )
