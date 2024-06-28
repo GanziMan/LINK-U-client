@@ -7,16 +7,19 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { AccountInfoType } from "@/app/main/page";
+import { AccountInfoType } from "@/app/page";
+import Image from "next/image";
 
 export default function CommonAccordion({
   AccountInfo,
-  isMale,
+  gender,
+  genderImageUrl,
   backgroundColor,
 }: {
   AccountInfo: AccountInfoType[];
   backgroundColor: string;
-  isMale: string;
+  genderImageUrl: string;
+  gender: string;
 }) {
   return (
     <AccordionST backgroundColor={backgroundColor}>
@@ -25,7 +28,10 @@ export default function CommonAccordion({
         aria-controls="panel1-content"
         id="panel1-header"
       >
-        {isMale}
+        <GenderBox>
+          <Box> {gender}</Box>
+          <Image src={genderImageUrl} alt="" width={50} height={50} />
+        </GenderBox>
       </AccordionSummary>
       <AccordionDetailsST>
         <AccordionDetailsInner>
@@ -60,13 +66,12 @@ const AccordionST = styled(Accordion)(
       borderTopLeftRadius: "4px",
       borderTopRightRadius: "4px",
       background: backgroundColor,
-      "MuiButtonBase-root": {
-        border: "0px",
+      "&.MuiPaper-root": {
+        boxShadow: "none", // box-shadow 제거
       },
-      "MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters css-gc6z-MuiPaper-root-MuiAccordion-root":
-        {
-          boxShadow: "0px",
-        },
+      "&.MuiAccordion-root::before": {
+        display: "none", // ::before 의사 요소 제거
+      },
     };
   }
 );
@@ -103,10 +108,10 @@ const AccordionDetailsInnerSection2 = styled(Box)(() => {
   };
 });
 
-const DivideLine = styled(Box)(() => {
+const GenderBox = styled(Box)(() => {
   return {
-    width: "100%",
-    borderBottom: "1px dotted rgb(223, 223, 223)",
+    display: "flex",
+    alignItems: "center",
   };
 });
 const AccountWrapper = styled(Box)(() => {
