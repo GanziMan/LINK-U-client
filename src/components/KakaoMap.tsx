@@ -8,8 +8,6 @@ declare global {
   }
 }
 
-const KAKAO_API_KEY = "5199d1d25fdf685b1f8614de4564477e"; // 실제 API 키로 변경하세요.
-
 const KakaoMap = () => {
   const initializeMap = () => {
     const container = document.getElementById("map");
@@ -25,7 +23,7 @@ const KakaoMap = () => {
   useEffect(() => {
     const kakaoMapScript = document.createElement("script");
     kakaoMapScript.async = false;
-    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false`;
+    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`;
     document.head.appendChild(kakaoMapScript);
 
     const onLoadKakaoAPI = () => {
