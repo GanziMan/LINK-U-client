@@ -22,12 +22,39 @@ export default function ShareKakao({
 }) {
   const handleShare = () => {
     window.Kakao.Share.sendDefault({
-      objectType: "text",
-      text: "도현이와 호영군의 결혼을 진심으로 축하드립니다. 축복해주세요!",
-      link: {
-        mobileWebUrl: "https://developers.kakao.com",
-        webUrl: "https://developers.kakao.com",
+      objectType: "feed",
+      content: {
+        title: "모바일 청첩장",
+        description: "호영이와 도현이의 결혼식을 초대합니다.",
+        imageUrl:
+          "https://ilotteshopping.com/myweddingstyle/image/main/img3.png",
+        link: {
+          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+          mobileWebUrl: "https://developers.kakao.com",
+          webUrl: "https://developers.kakao.com",
+        },
       },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: "웹으로 보기",
+          link: {
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com",
+          },
+        },
+        {
+          title: "앱으로 보기",
+          link: {
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com",
+          },
+        },
+      ],
     });
   };
   useEffect(() => {

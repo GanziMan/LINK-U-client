@@ -73,7 +73,7 @@ export default function Page() {
   const copyUrlToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      enqueueSnackbar<"success">("URL이 클립보드에 복사되었습니다!", {
+      enqueueSnackbar<"success">("모바일 청첩장 URL이 복사되었습니다!", {
         variant: "success",
       });
     } catch (err) {
@@ -333,7 +333,7 @@ export default function Page() {
                 background="#EEE"
                 onClick={() => copyUrlToClipboard()}
               >
-                url 링크 복사하기
+                청첩장 링크 복사
               </ShareButton>
             </ShareBox>
           </MotionBox>

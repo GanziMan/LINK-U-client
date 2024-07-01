@@ -41,7 +41,7 @@ export default function CommonAccordion({
                 <AccordionDetailsInnerSection1>
                   <strong>{account.position}</strong> {account.name}
                 </AccordionDetailsInnerSection1>
-                <AccordionDetailsInnerSection2>
+                <AccordionDetailsInnerSection2 onClick={() => {}}>
                   <Box>{account.accountInfo}</Box>
                   <Box>
                     <AccountWrapper>
