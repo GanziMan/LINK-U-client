@@ -236,13 +236,19 @@ export default function Page() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 2 }}
           >
-            <Image
-              src={"/images/icons/location-icon.svg"}
-              alt=""
-              width={80}
-              height={70}
-            />
-            <AccountBoxText>오시는 길</AccountBoxText>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              alignItems={"center"}
+            >
+              <Image
+                src={"/images/icons/location-icon.svg"}
+                alt=""
+                width={80}
+                height={70}
+              />
+              <AccountBoxText>오시는 길</AccountBoxText>
+            </Box>
           </MotionBox>
 
           <MotionBox
