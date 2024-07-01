@@ -20,10 +20,10 @@ export default function ShareKakao({
   imageUrl: string;
   link: LinkType;
 }) {
-  const handleShare = async () => {
-    await window.Kakao.Share.sendDefault({
+  const handleShare = () => {
+    window.Kakao.Share.sendDefault({
       objectType: "text",
-      text: "기본 템플릿으로 제공되는 텍스트 템플릿은 텍스트를 최대 200자까지 표시할 수 있습니다. 텍스트 템플릿은 텍스트 영역과 하나의 기본 버튼을 가집니다. 임의의 버튼을 설정할 수도 있습니다. 여러 장의 이미지, 프로필 정보 등 보다 확장된 형태의 카카오톡 공유는 다른 템플릿을 이용해 보낼 수 있습니다.",
+      text: "도현이와 호영군의 결혼을 진심으로 축하드립니다. 축복해주세요!",
       link: {
         mobileWebUrl: "https://developers.kakao.com",
         webUrl: "https://developers.kakao.com",
@@ -31,10 +31,19 @@ export default function ShareKakao({
     });
   };
   useEffect(() => {
-    if (typeof window !== "undefined" && window.Kakao) {
-      if (!window.Kakao.isInitialized) {
+    if (typeof window !== "undefined" && !window.Kakao) {
+      const script = document.createElement("script");
+      script.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+      script.onload = () => {
         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY!);
-      }
+      };
+      document.body.appendChild(script);
+    } else if (
+      typeof window !== "undefined" &&
+      window.Kakao &&
+      !window.Kakao.isInitialized()
+    ) {
+      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY!);
     }
   }, []);
 
