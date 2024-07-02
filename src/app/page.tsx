@@ -84,6 +84,13 @@ export default function Page() {
     }
   };
 
+  const kakaoMap = () => {
+    const latitude = 37.759027;
+    const longitude = 126.774992;
+    const kakaoMapUrl = `https://map.kakao.com/link/map/${latitude},${longitude}`;
+    window.open(kakaoMapUrl, "_blank");
+  };
+
   return (
     <SnackbarProvider
       autoHideDuration={1000}
@@ -277,7 +284,9 @@ export default function Page() {
             </Box>
           </MotionBox>
           <KakaoMap />
-          <KakaoMapButton>카카오맵에서 보기</KakaoMapButton>
+          <KakaoMapButton onClick={() => kakaoMap()}>
+            카카오맵에서 보기
+          </KakaoMapButton>
           <MotionBox
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
