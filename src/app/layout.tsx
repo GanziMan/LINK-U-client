@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import ClientProvider from "./providers/queryClientProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -14,11 +16,12 @@ declare global {
     Kakao: any;
   }
 }
-export default function RootLayout({
-  children,
-}: Readonly<{
+
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <head>
@@ -33,8 +36,9 @@ export default function RootLayout({
           src={`https://developers.kakao.com/sdk/js/kakao.min.js`}
         />
       </head>
-
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ClientProvider>{children}</ClientProvider>
+      </body>
     </html>
   );
 }
