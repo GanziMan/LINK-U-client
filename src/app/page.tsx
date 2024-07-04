@@ -1,20 +1,64 @@
 "use client";
+
 import CommonAccordion from "@/components/Accordion";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
-import { Box, styled } from "@mui/material";
+import { Box } from "@mui/material";
 import JSConfetti from "js-confetti";
 import Image from "next/image";
-import { useState } from "react";
-import {
-  MotionValue,
-  motion,
-  useTransform,
-  useViewportScroll,
-} from "framer-motion";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ShareKakao from "@/components/ShareKakao";
+import { getCount } from "@/features/invitation/getCount";
+import { updateCount } from "@/features/invitation/updateCount";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getComments } from "@/features/invitation/getComments";
+import { toFormikValidationSchema } from "zod-formik-adapter";
+import {
+  AccountBox,
+  AccountBoxText,
+  CommentContainer,
+  CommentContentBox,
+  CommentDateBox,
+  CommentNameBox,
+  CommentWrapper,
+  CommentWriteBox,
+  CommentWriteContentBox,
+  CommentWriteNameBox,
+  CommentWriteTextAreaBox,
+  CommentWriteTextBox,
+  DivideLine,
+  GuideBox,
+  HeartBox,
+  HeartCountBox,
+  InvitaionContainer,
+  InvitaionWrapper,
+  InviteText,
+  KakaoMapButton,
+  LocationNameBox,
+  LocationText,
+  LocationTextBox,
+  ParentText,
+  ShareBox,
+  ShareButton,
+  VisitorBox,
+  WeddingImageText,
+  WeddingImageWrapper,
+} from "./components";
+import { createComment } from "@/features/invitation/createComment";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { z } from "zod";
+import { createCommentSchema } from "@/features/invitation/schema";
+
+interface CommentFormValues {
+  name: string;
+  comment: string;
+}
+
+const initialValues: CommentFormValues = {
+  name: "",
+  comment: "",
+};
 
 export interface AccountInfoType {
   position: string;
@@ -22,6 +66,11 @@ export interface AccountInfoType {
   accountInfo: string;
 }
 
+export interface CommentType {
+  name: string;
+  comment: string;
+  date: string;
+}
 const GroomAccountInfo: AccountInfoType[] = [
   {
     position: "신랑",
@@ -58,17 +107,55 @@ const BrideAccountInfo: AccountInfoType[] = [
 ];
 
 export default function Page() {
-  const { scrollY } = useViewportScroll(); // 현재 위치 가져오기
-  const opacity: MotionValue<number> = useTransform(scrollY, [0, 300], [0, 1]);
-  const y: MotionValue<number> = useTransform(scrollY, [0, 300], [-50, 0]);
+  const queryClient = useQueryClient();
+  const jsConfetti = new JSConfetti();
 
-  const handleClick = () => {
-    const jsConfetti = new JSConfetti();
-    jsConfetti.addConfetti({
-      confettiColors: ["#CAB0FF"],
-      confettiNumber: 500,
-    });
-  };
+  const { data: likeCount } = useQuery({
+    queryKey: ["like-count"],
+    queryFn: async () => {
+      const response = await getCount({ id: "1" });
+      return response?.data?.like_count;
+    },
+  });
+
+  const { data: commentData } = useQuery({
+    queryKey: ["comment"],
+    queryFn: async () => {
+      const response = await getComments();
+      return response?.data;
+    },
+  });
+
+  const { mutate: likeCountMutation } = useMutation({
+    mutationFn: async () => await updateCount({ id: "1" }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["like-count"],
+      });
+
+      jsConfetti.addConfetti({
+        confettiColors: ["#CAB0FF"],
+        confettiNumber: 500,
+      });
+    },
+    onError: () => {
+      enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
+    },
+  });
+
+  const { mutate: commentMutation } = useMutation({
+    mutationFn: async () => await createComment({ name: "", comment: "" }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["comment"],
+      });
+
+      enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
+    },
+    onError: () => {
+      enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
+    },
+  });
 
   const copyUrlToClipboard = async () => {
     try {
@@ -101,131 +188,69 @@ export default function Page() {
     >
       <InvitaionContainer>
         <InvitaionWrapper>
-          <MotionBox
-            // style={{ opacity: opacity as unknown as number, y }}
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <BackgroundMusic />
-            <WeddingImageWrapper>
-              <Image
-                src="/images/icons/wedding-icon.svg"
-                alt=""
-                width={81}
-                height={81}
-              />
-              <WeddingImageText>Wedding Invitation</WeddingImageText>
-            </WeddingImageWrapper>
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <InviteText>
-              <strong>도현이</strong>와 <strong>호영이</strong>의 결혼식에
-              소중한 분들을 초대합니다.
-            </InviteText>{" "}
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            25.02.15.SAT
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
+          <BackgroundMusic />
+          <WeddingImageWrapper>
             <Image
-              src={"/images/image/gay.jpeg"}
+              src="/images/icons/wedding-icon.svg"
               alt=""
-              width={328}
-              height={328}
+              width={81}
+              height={81}
             />
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <Image
-              src={"/images/image/greeting.jpg"}
-              alt=""
-              width={128}
-              height={128}
-            />
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-          >
-            <LocationText>
-              저희 두 사람, 하나가 되어 평생을 함께 걸어 가고자 합니다. 자리에
-              오셔서 새로운 시작을 축복해 주세요.
-            </LocationText>
-          </MotionBox>
-
+            <WeddingImageText>Wedding Invitation</WeddingImageText>
+          </WeddingImageWrapper>
+          <InviteText>
+            <strong>도현이</strong>와 <strong>호영이</strong>의 결혼식에 소중한
+            분들을 초대합니다.
+          </InviteText>
+          25.02.15.SAT
+          <Image
+            src={"/images/image/gay.jpeg"}
+            alt=""
+            width={328}
+            height={328}
+          />
+          <Image
+            src={"/images/image/greeting.jpg"}
+            alt=""
+            width={128}
+            height={128}
+          />
+          <LocationText>
+            저희 두 사람, 하나가 되어 평생을 함께 걸어 가고자 합니다. 자리에
+            오셔서 새로운 시작을 축복해 주세요.
+          </LocationText>
           <DivideLine />
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-          >
-            <ParentText>
-              <Box>
-                정이름 &bull; 김명래 의 아들 <strong>호영</strong>
-              </Box>
-              <Box>
-                김동욱 &bull; 김명숙 의 딸 <strong>도현</strong>
-              </Box>
-            </ParentText>
-          </MotionBox>
+          <ParentText>
+            <Box>
+              정이름 &bull; 김명래 의 아들 <strong>호영</strong>
+            </Box>
+            <Box>
+              김동욱 &bull; 김명숙 의 딸 <strong>도현</strong>
+            </Box>
+          </ParentText>
           <DivideLine />
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.4 }}
-          >
-            <LocationText>
-              2025년 2월 15일 토요일 오후 12시 파주 통돼지 바베큐집
-            </LocationText>
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.6 }}
-          >
-            <Image
-              src={"/images/icons/champagne-icon.svg"}
-              alt=""
-              width={50}
-              height={50}
-              style={{
-                marginLeft: "auto",
-              }}
-            />
-          </MotionBox>
+          <LocationText>
+            2025년 2월 15일 토요일 오후 12시 파주 통돼지 바베큐집
+          </LocationText>
+          <Image
+            src={"/images/icons/champagne-icon.svg"}
+            alt=""
+            width={50}
+            height={50}
+            style={{
+              marginLeft: "auto",
+            }}
+          />
           <CommonSwiper />
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.8 }}
-          >
-            <AccountBox>
-              <Image
-                src={"/images/icons/dove-icon.svg"}
-                alt=""
-                width={80}
-                height={70}
-              />
-              <AccountBoxText>마음 전하실 곳</AccountBoxText>
-            </AccountBox>
-          </MotionBox>
+          <AccountBox>
+            <Image
+              src={"/images/icons/dove-icon.svg"}
+              alt=""
+              width={80}
+              height={70}
+            />
+            <AccountBoxText>마음 전하실 곳</AccountBoxText>
+          </AccountBox>
           <CommonAccordion
             AccountInfo={GroomAccountInfo}
             backgroundColor={"rgb(240, 243, 246)"}
@@ -238,277 +263,102 @@ export default function Page() {
             gender="신부측"
             genderImageUrl="/images/icons/bridge-icon.svg"
           />
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2 }}
-          >
-            <Box
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
-              <Image
-                src={"/images/icons/location-icon.svg"}
-                alt=""
-                width={80}
-                height={70}
-              />
-              <AccountBoxText>오시는 길</AccountBoxText>
-            </Box>
-          </MotionBox>
-
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2.2 }}
-            textAlign={"center"}
-          >
-            <Box
-              sx={{
-                fontSize: "18px",
-                lineHeight: "26px",
-                fontWeight: 700,
-                color: "rgb(49, 46, 42)",
-              }}
-            >
-              경기도 파주시 통돼지 바베큐집
-            </Box>
-            <Box
-              sx={{
-                fontSize: "14px",
-                lineHeight: "26px",
-              }}
-            >
-              (파주시 금촌로 16가길 889)
-            </Box>
-          </MotionBox>
+          <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+            <Image
+              src={"/images/icons/location-icon.svg"}
+              alt=""
+              width={80}
+              height={70}
+            />
+            <AccountBoxText>오시는 길</AccountBoxText>
+          </Box>
+          <LocationNameBox>경기도 파주시 통돼지 바베큐집</LocationNameBox>
+          <LocationTextBox>(파주시 금촌로 16가길 889)</LocationTextBox>
           <KakaoMap />
           <KakaoMapButton onClick={() => kakaoMap()}>
             카카오맵에서 보기
           </KakaoMapButton>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2.4 }}
-            marginRight={"auto"}
-          >
-            <GuideBox>주차안내</GuideBox>
-            <Box color={"#594739"}> 파주 통돼지집 내 주차장 이용</Box>
-            <Box color={"#7A3D0C"}>
-              * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
-            </Box>
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2.6 }}
-            marginRight={"auto"}
-          >
-            <GuideBox>지하철</GuideBox>
-            <Box color={"#594739"}>
-              [3호선] 풍산역 2번,3번 출구에서 도보 10분
-            </Box>
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 2.8 }}
-            marginRight={"auto"}
-          >
-            <GuideBox>버스</GuideBox>
-            <Box color={"#594739"}>
-              파주중학교 또는 일진공원 하차 후 도보 5분 - 간선 141번, 지선
-              2011번, 직행 3600번
-            </Box>
-          </MotionBox>
-          <MotionBox
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 3 }}
-          >
-            <ShareBox>
+          <GuideBox>주차안내</GuideBox>
+          <Box color={"#594739"}> 파주 통돼지집 내 주차장 이용</Box>
+          <Box color={"#7A3D0C"}>
+            * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
+          </Box>
+          <GuideBox>지하철</GuideBox>
+          <Box color={"#594739"}>[3호선] 풍산역 2번,3번 출구에서 도보 10분</Box>
+          <GuideBox>버스</GuideBox>
+          <Box color={"#594739"}>
+            파주중학교 또는 일진공원 하차 후 도보 5분 - 간선 141번, 지선 2011번,
+            직행 3600번
+          </Box>
+          <ShareBox>
+            <HeartBox onClick={() => likeCountMutation()}>
+              <HeartCountBox>{likeCount}</HeartCountBox>
               <Image
                 alt=""
                 src={"/images/icons/heart-icon.svg"}
-                onClick={() => handleClick()}
                 style={{ cursor: "pointer" }}
                 width={100}
                 height={100}
               />
-              <ShareKakao
-                title=""
-                imageUrl=""
-                link={{
-                  webUrl: "",
-                  mobileWebUrl: "",
-                }}
-              />
-              <ShareButton
-                background="#EEE"
-                onClick={() => copyUrlToClipboard()}
-              >
-                청첩장 링크 복사
-              </ShareButton>
-            </ShareBox>
-          </MotionBox>
+            </HeartBox>
+            <ShareKakao
+              title=""
+              imageUrl=""
+              link={{
+                webUrl: "",
+                mobileWebUrl: "",
+              }}
+              likeCount={likeCount!}
+            />
+            <ShareButton background="#EEE" onClick={() => copyUrlToClipboard()}>
+              청첩장 링크 복사
+            </ShareButton>
+          </ShareBox>
+          <VisitorBox>방명록</VisitorBox>
+          <CommentContainer>
+            {commentData?.map((comment: CommentType) => {
+              return (
+                <CommentWrapper>
+                  <CommentNameBox>{comment.name}</CommentNameBox>
+
+                  <CommentContentBox>{comment.comment}</CommentContentBox>
+                  <CommentDateBox>{comment.date}</CommentDateBox>
+                </CommentWrapper>
+              );
+            })}
+          </CommentContainer>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={toFormikValidationSchema(createCommentSchema)}
+            onSubmit={() => {}}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <CommentWriteBox>
+                  <CommentWriteNameBox>
+                    <Box>성함</Box>
+                    <CommentWriteTextBox
+                      inputProps={{
+                        style: {
+                          width: 100,
+                          height: 10,
+                        },
+                      }}
+                    />
+                  </CommentWriteNameBox>
+                  <CommentWriteContentBox>
+                    <Box>전하고 싶은 말</Box>
+                    <CommentWriteTextAreaBox />
+                  </CommentWriteContentBox>
+                </CommentWriteBox>
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
         </InvitaionWrapper>
       </InvitaionContainer>
     </SnackbarProvider>
   );
 }
-
-const InvitaionContainer = styled(Box)(() => {
-  return {
-    width: "100%",
-    color: "#594739",
-    background: "#f1e0ce",
-    display: "flex",
-    justifyContent: "center",
-  };
-});
-
-const InvitaionWrapper = styled(Box)(() => {
-  return {
-    padding: "50px 20px 50px 20px",
-    width: 390,
-    gap: "30px",
-    background: "white",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-  };
-});
-
-const WeddingImageWrapper = styled(Box)(() => {
-  return {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-  };
-});
-
-const WeddingImageText = styled(Box)(() => {
-  return {
-    fontSize: "14px",
-    fontFamily: "judson",
-  };
-});
-
-const InviteText = styled(Box)(() => {
-  return {
-    color: "#594739",
-    width: 203,
-    wordBreak: "keep-all",
-    whiteSpace: "pre-line",
-    fontSize: "16px",
-    lineHeight: "30px",
-    textAlign: "center",
-  };
-});
-const InviteDay = styled(Box)(() => {
-  return {
-    color: "#594739",
-    width: 203,
-    height: 120,
-    whiteSpace: "pre-line",
-    fontSize: "15px",
-    lineHeight: "30px",
-    textAlign: "center",
-  };
-});
-
-const DivideLine = styled(Box)(() => {
-  return {
-    width: 95,
-    borderBottom: "1px solid black",
-  };
-});
-const ParentText = styled(Box)(() => {
-  return {
-    display: "flex",
-    flexDirection: "column",
-    gap: "5px",
-  };
-});
-
-const LocationText = styled(Box)(() => {
-  return {
-    fontSize: "14px",
-    lineHeight: "30px",
-    width: 225,
-    fontWeight: 600,
-    textAlign: "center",
-    whiteSpace: "pre-line",
-    wordBreak: "keep-all",
-  };
-});
-
-const AccountBox = styled(Box)(() => {
-  return {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
-});
-
-const AccountBoxText = styled(Box)(() => {
-  return {
-    fontSize: "14px",
-    color: "#775F4C",
-  };
-});
-
-const KakaoMapButton = styled(Box)(() => {
-  return {
-    background: "rgb(243, 235, 220)",
-    borderRadius: "4px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "14px",
-    lineHeight: "26px",
-    height: 38,
-    width: "100%",
-  };
-});
-
-const GuideBox = styled(Box)(() => {
-  return {
-    color: "#D67E2C",
-    fontSize: "16px",
-    lineHeight: "26px",
-    fontWeight: 700,
-  };
-});
-
-const ShareBox = styled(Box)(() => {
-  return {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-  };
-});
-
-const ShareButton = styled(Box)(({ background }: { background: string }) => {
-  return {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "rgb(70, 65, 61)",
-    background: background,
-    cursor: "pointer",
-    fontSize: "16px",
-    lineHeight: "26px",
-    width: 230,
-    height: 46,
-    borderRadius: "100px",
-    fontWeight: 600,
-  };
-});
-
-// motion으로 감싸는 컴포넌트를 생성합니다.
-const MotionBox = motion(Box);
