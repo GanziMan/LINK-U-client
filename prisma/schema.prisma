@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model Oners {
   id Int @id
   name String
   email String
@@ -16,4 +16,11 @@ model Users {
 model Counts {
   id String @id
   like_count Int
+}
+
+model Comments{
+   id Int @id @default(autoincrement())
+   name String
+   comment String
+   createdAt DateTime @default(now())
 }
