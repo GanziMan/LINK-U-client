@@ -15,13 +15,15 @@ export default function ShareKakao({
   title,
   imageUrl,
   link,
+  likeCount,
 }: {
   title: string;
   imageUrl: string;
   link: LinkType;
+  likeCount: number;
 }) {
   const handleShare = () => {
-    window.Kakao.Share.sendDefault({
+    window.Kakao?.Share.sendDefault({
       objectType: "feed",
       content: {
         title: "모바일 청첩장",
@@ -35,7 +37,7 @@ export default function ShareKakao({
         },
       },
       social: {
-        likeCount: 286,
+        likeCount: likeCount,
         commentCount: 45,
         sharedCount: 845,
       },
