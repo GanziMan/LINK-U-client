@@ -144,7 +144,7 @@ export default function Page() {
   });
 
   const { mutate: commentMutation } = useMutation({
-    mutationFn: async () => await createComment({ name: "", comment: "" }),
+    mutationFn: createComment,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["comment"],
@@ -278,17 +278,29 @@ export default function Page() {
           <KakaoMapButton onClick={() => kakaoMap()}>
             카카오맵에서 보기
           </KakaoMapButton>
-          <GuideBox>주차안내</GuideBox>
-          <Box color={"#594739"}> 파주 통돼지집 내 주차장 이용</Box>
-          <Box color={"#7A3D0C"}>
-            * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
-          </Box>
-          <GuideBox>지하철</GuideBox>
-          <Box color={"#594739"}>[3호선] 풍산역 2번,3번 출구에서 도보 10분</Box>
-          <GuideBox>버스</GuideBox>
-          <Box color={"#594739"}>
-            파주중학교 또는 일진공원 하차 후 도보 5분 - 간선 141번, 지선 2011번,
-            직행 3600번
+          <Box display={"flex"} flexDirection={"column"} gap={"20px"}>
+            <Box>
+              <GuideBox>주차안내</GuideBox>
+              <Box color={"#594739"}> 파주 통돼지집 내 주차장 이용</Box>
+              <Box color={"#7A3D0C"}>
+                * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
+              </Box>
+            </Box>
+            <hr />
+            <Box>
+              <GuideBox>지하철</GuideBox>
+              <Box color={"#594739"}>
+                [3호선] 풍산역 2번,3번 출구에서 도보 10분
+              </Box>
+            </Box>
+            <hr />
+            <Box>
+              <GuideBox>버스</GuideBox>
+              <Box color={"#594739"}>
+                파주중학교 또는 일진공원 하차 후 도보 5분 - 간선 141번, 지선
+                2011번, 직행 3600번
+              </Box>
+            </Box>
           </Box>
           <ShareBox>
             <HeartBox onClick={() => likeCountMutation()}>
@@ -327,36 +339,60 @@ export default function Page() {
               );
             })}
           </CommentContainer>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={toFormikValidationSchema(createCommentSchema)}
-            onSubmit={() => {}}
+          <Box
+            sx={{
+              width: "100%",
+            }}
           >
-            {({ isSubmitting }) => (
-              <Form>
-                <CommentWriteBox>
-                  <CommentWriteNameBox>
-                    <Box>성함</Box>
-                    <CommentWriteTextBox
-                      inputProps={{
-                        style: {
-                          width: 100,
-                          height: 10,
-                        },
-                      }}
-                    />
-                  </CommentWriteNameBox>
-                  <CommentWriteContentBox>
-                    <Box>전하고 싶은 말</Box>
-                    <CommentWriteTextAreaBox />
-                  </CommentWriteContentBox>
-                </CommentWriteBox>
-                <button type="submit" disabled={isSubmitting}>
-                  Submit
-                </button>
-              </Form>
-            )}
-          </Formik>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={toFormikValidationSchema(createCommentSchema)}
+              onSubmit={(value) => {
+                commentMutation(value);
+              }}
+            >
+              {({ isSubmitting, dirty, getFieldProps }) => (
+                <Form>
+                  <CommentWriteBox>
+                    <CommentWriteNameBox>
+                      <CommentWriteTextBox
+                        placeholder="성함"
+                        inputProps={{
+                          style: {
+                            width: 100,
+                            height: 10,
+                          },
+                        }}
+                        {...getFieldProps("name")}
+                      />
+                    </CommentWriteNameBox>
+                    <CommentWriteContentBox>
+                      <CommentWriteTextAreaBox
+                        minRows={3}
+                        placeholder="하고 싶은 말을 전하세요."
+                        {...getFieldProps("comment")}
+                      />
+                    </CommentWriteContentBox>
+                  </CommentWriteBox>
+                  <button
+                    type="submit"
+                    disabled={dirty}
+                    style={{
+                      borderRadius: "4px",
+                      width: 100,
+                      height: 40,
+                      float: "right",
+                      border: "1px solid #f1e0ce",
+                      color: "#f1e0ce",
+                      marginTop: "30px",
+                    }}
+                  >
+                    보내기
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          </Box>
         </InvitaionWrapper>
       </InvitaionContainer>
     </SnackbarProvider>

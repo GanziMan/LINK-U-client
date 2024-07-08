@@ -255,6 +255,17 @@ export const CommentWriteTextBox = styled(TextField)(() => {
     "& .MuiOutlinedInput-root fieldset": {
       border: "1px solid #f1e0ce",
     },
+    // "&.MuiInputLabel-root": {
+    //   top: "50%",
+    //   transform: "translateY(-50%)",
+    // },
+    // ".MuiInputBase-root": {
+    //   alignItems: "center",
+    // },
+    // ".MuiInputLabel-shrink": {
+    //   top: 0,
+    //   transform: "translate(0, -100%)",
+    // },
   };
 });
 
@@ -271,9 +282,10 @@ export const CommentWriteContentBox = styled(Box)(() => {
 export const CommentWriteTextAreaBox = styled(TextareaAutosize)(() => {
   return {
     width: "100%",
-    height: 80,
+    height: 1000,
     border: "1px solid #f1e0ce",
     borderRadius: "4px",
+    padding: "16.5px 14px",
   };
 });
 
