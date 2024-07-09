@@ -11,7 +11,7 @@ import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ShareKakao from "@/components/ShareKakao";
 import { getCount } from "@/features/invitation/getCount";
 import { updateCount } from "@/features/invitation/updateCount";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getComments } from "@/features/invitation/getComments";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import {
@@ -47,8 +47,9 @@ import {
 } from "./components";
 import { createComment } from "@/features/invitation/createComment";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { z } from "zod";
 import { createCommentSchema } from "@/features/invitation/schema";
+import { useState } from "react";
+import { number } from "zod";
 
 interface CommentFormValues {
   name: string;
@@ -110,6 +111,8 @@ export default function Page() {
   const queryClient = useQueryClient();
   const jsConfetti = new JSConfetti();
 
+  const [cursor, setCursor] = useState<number>(0);
+
   const { data: likeCount } = useQuery({
     queryKey: ["like-count"],
     queryFn: async () => {
@@ -118,12 +121,12 @@ export default function Page() {
     },
   });
 
-  const { data: commentData } = useQuery({
-    queryKey: ["comment"],
-    queryFn: async () => {
-      const response = await getComments();
-      return response?.data;
-    },
+  const { data: commentData,fetchNextPage,hasNextPage,isFetching,isFetchingNextPage, } = useInfiniteQuery({
+    queryKey:[""],
+  queryFn: ({ pageParam = 1 }) => getComments({cursor:cursor,take:pageParam}),
+  initialPageParam:0,
+  getNextPageParam: (lastPage, allPages) => setCursor(lastPage?.data?.nextCursor!),
+  getPreviousPageParam: (firstPage, allPages) => setCursor(firstPage?.data?.nextCursor!),
   });
 
   const { mutate: likeCountMutation } = useMutation({
