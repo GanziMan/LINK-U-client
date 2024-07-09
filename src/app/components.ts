@@ -190,6 +190,10 @@ export const VisitorBox = styled(Box)(() => {
 
 export const CommentContainer = styled(Box)(() => {
   return {
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
     borderRadius: "4px",
     border: "1px solid #f1e0ce",
     width: "100%",
