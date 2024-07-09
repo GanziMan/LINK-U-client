@@ -11,7 +11,14 @@ import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ShareKakao from "@/components/ShareKakao";
 import { getCount } from "@/features/invitation/getCount";
 import { updateCount } from "@/features/invitation/updateCount";
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { getComments } from "@/features/invitation/getComments";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import {
@@ -71,6 +78,7 @@ export interface CommentType {
   name: string;
   comment: string;
   date: string;
+  nextCursor: string;
 }
 const GroomAccountInfo: AccountInfoType[] = [
   {
@@ -121,12 +129,25 @@ export default function Page() {
     },
   });
 
-  const { data: commentData,fetchNextPage,hasNextPage,isFetching,isFetchingNextPage, } = useInfiniteQuery({
-    queryKey:[""],
-  queryFn: ({ pageParam = 1 }) => getComments({cursor:cursor,take:pageParam}),
-  initialPageParam:0,
-  getNextPageParam: (lastPage, allPages) => setCursor(lastPage?.data?.nextCursor!),
-  getPreviousPageParam: (firstPage, allPages) => setCursor(firstPage?.data?.nextCursor!),
+  const {
+    data: commentPage,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [""],
+    queryFn: ({ pageParam = 1 }) =>
+      getComments({ cursor: cursor, take: pageParam }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      setCursor(lastPage?.data?.nextCursor!);
+      return lastPage?.data?.nextCursor || null;
+    },
+    getPreviousPageParam: (firstPage, allPages) => {
+      setCursor(firstPage?.data?.nextCursor!);
+      return firstPage?.data?.nextCursor || null;
+    },
   });
 
   const { mutate: likeCountMutation } = useMutation({
@@ -146,19 +167,19 @@ export default function Page() {
     },
   });
 
-  const { mutate: commentMutation } = useMutation({
-    mutationFn: createComment,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["comment"],
-      });
+  // const { mutate: commentMutation } = useMutation({
+  //   mutationFn: createComment,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({
+  //       queryKey: ["comment"],
+  //     });
 
-      enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
-    },
-    onError: () => {
-      enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
-    },
-  });
+  //     enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
+  //   },
+  //   onError: () => {
+  //     enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
+  //   },
+  // });
 
   const copyUrlToClipboard = async () => {
     try {
@@ -331,27 +352,23 @@ export default function Page() {
           </ShareBox>
           <VisitorBox>방명록</VisitorBox>
           <CommentContainer>
-            {commentData?.map((comment: CommentType) => {
+            {/* {commentData?.map((comment: CommentType) => {
               return (
-                <CommentWrapper>
+                <CommentWrapper id={comment.nextCursor}>
                   <CommentNameBox>{comment.name}</CommentNameBox>
 
                   <CommentContentBox>{comment.comment}</CommentContentBox>
                   <CommentDateBox>{comment.date}</CommentDateBox>
                 </CommentWrapper>
               );
-            })}
+            })} */}
           </CommentContainer>
-          <Box
-            sx={{
-              width: "100%",
-            }}
-          >
+          <Box width={"100%"}>
             <Formik
               initialValues={initialValues}
               validationSchema={toFormikValidationSchema(createCommentSchema)}
               onSubmit={(value) => {
-                commentMutation(value);
+                // commentMutation(value);
               }}
             >
               {({ isSubmitting, dirty, getFieldProps }) => (
