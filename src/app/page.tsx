@@ -19,7 +19,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { getComments } from "@/features/invitation/getComments";
+import { pageComments } from "@/features/invitation/pageComments";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import {
   AccountBox,
@@ -140,7 +140,7 @@ export default function Page() {
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["comment-page"],
-    queryFn: ({ pageParam = 1 }) => getComments({ cursor: pageParam }),
+    queryFn: ({ pageParam = 1 }) => pageComments({ cursor: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage?.data?.nextCursor || null;

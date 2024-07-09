@@ -6,16 +6,18 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { z } from "zod";
-import { getCommentSchema } from "./schema";
+import { pageCommentsSchema } from "./schema";
 
 // 플러그인 로드
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export async function getComments(request: z.input<typeof getCommentSchema>) {
+export async function pageComments(
+  request: z.input<typeof pageCommentsSchema>
+) {
   const prisma = new PrismaClient();
 
-  const validated = await getCommentSchema.safeParseAsync(request);
+  const validated = await pageCommentsSchema.safeParseAsync(request);
 
   if (validated.error) {
     return {

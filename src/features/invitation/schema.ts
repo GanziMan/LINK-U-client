@@ -8,7 +8,7 @@ export const updateCountSchema = z.object({
   id: z.string(),
 });
 
-export const getCommentSchema = z.object({
+export const pageCommentsSchema = z.object({
   // take:z.number(),
   cursor: z.number(),
 });
