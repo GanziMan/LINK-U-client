@@ -147,8 +147,6 @@ export default function Page() {
 
   const comments = commentPage?.pages[currentPage - 1]?.data?.comments || [];
 
-  console.log(currentPage);
-  console.log(commentPage);
   const { mutate: likeCountMutation } = useMutation({
     mutationFn: async () => await updateCount({ id: "1" }),
     onSuccess: () => {
