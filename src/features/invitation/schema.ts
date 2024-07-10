@@ -10,7 +10,7 @@ export const updateCountSchema = z.object({
 
 export const pageCommentsSchema = z.object({
   // take:z.number(),
-  cursor: z.number(),
+  cursor: z.number().nullish(),
 });
 
 export const createCommentSchema = z.object({
