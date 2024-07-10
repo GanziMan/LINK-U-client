@@ -33,7 +33,7 @@ export default function CommonAccordion({
           <Image src={genderImageUrl} alt="" width={50} height={50} />
         </GenderBox>
       </AccordionSummary>
-      <AccordionDetailsST>
+      <AccordionDetailsST borderInnerColor={backgroundColor}>
         <AccordionDetailsInner>
           {AccountInfo.map((account, index) => {
             return (
@@ -78,10 +78,15 @@ const AccordionST = styled(Accordion)(({
   };
 });
 
-const AccordionDetailsST = styled(AccordionDetails)(() => {
+const AccordionDetailsST = styled(AccordionDetails)(({
+  borderInnerColor,
+}: {
+  borderInnerColor: string;
+}) => {
   return {
     background: "white",
     padding: "16px",
+    border: `1px solid ${borderInnerColor}`,
   };
 });
 
