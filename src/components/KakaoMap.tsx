@@ -10,7 +10,7 @@ declare global {
 
 const KakaoMap = () => {
   const initializeMap = () => {
-    const container = document.getElementById("map");
+    const container = document?.getElementById("map");
     if (container && window.kakao && window.kakao.maps) {
       const options = {
         center: new window.kakao.maps.LatLng(33.450701, 126.570667),
@@ -21,14 +21,14 @@ const KakaoMap = () => {
   };
 
   useEffect(() => {
-    const kakaoMapScript = document.createElement("script");
+    const kakaoMapScript = document?.createElement("script");
     kakaoMapScript.async = false;
     kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`;
-    document.head.appendChild(kakaoMapScript);
+    document?.head.appendChild(kakaoMapScript);
 
     const onLoadKakaoAPI = () => {
       window.kakao.maps.load(() => {
-        var container = document.getElementById("map");
+        var container = document?.getElementById("map");
         var options = {
           center: new window.kakao.maps.LatLng(37.759027, 126.774992),
           level: 3,

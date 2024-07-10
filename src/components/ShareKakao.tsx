@@ -61,12 +61,12 @@ export default function ShareKakao({
   };
   useEffect(() => {
     if (typeof window !== "undefined" && !window.Kakao) {
-      const script = document.createElement("script");
+      const script = document?.createElement("script");
       script.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
       script.onload = () => {
         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY!);
       };
-      document.body.appendChild(script);
+      document?.body.appendChild(script);
     } else if (
       typeof window !== "undefined" &&
       window.Kakao &&
