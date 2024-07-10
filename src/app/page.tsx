@@ -4,14 +4,13 @@ import CommonAccordion from "@/components/Accordion";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import JSConfetti from "js-confetti";
 import Image from "next/image";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ShareKakao from "@/components/ShareKakao";
 import { getCount } from "@/features/invitation/getCount";
 import { updateCount } from "@/features/invitation/updateCount";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 import {
   useInfiniteQuery,
@@ -25,10 +24,6 @@ import {
   AccountBox,
   AccountBoxText,
   CommentContainer,
-  CommentContentBox,
-  CommentDateBox,
-  CommentNameBox,
-  CommentWrapper,
   CommentWriteBox,
   CommentWriteContentBox,
   CommentWriteNameBox,
@@ -53,9 +48,9 @@ import {
   WeddingImageWrapper,
 } from "./components";
 import { createComment } from "@/features/invitation/createComment";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { createCommentSchema } from "@/features/invitation/schema";
-import { number } from "zod";
+
 import PaginationComponent from "@/components/Pagination";
 import { useEffect, useState } from "react";
 
@@ -118,7 +113,11 @@ const BrideAccountInfo: AccountInfoType[] = [
 
 export default function Page() {
   const queryClient = useQueryClient();
-  const jsConfetti = new JSConfetti();
+
+  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
+  useEffect(() => {
+    setJsConfetti(new JSConfetti());
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const { data: likeCount } = useQuery({
@@ -154,7 +153,7 @@ export default function Page() {
         queryKey: ["like-count"],
       });
 
-      jsConfetti.addConfetti({
+      jsConfetti?.addConfetti({
         confettiColors: ["#CAB0FF"],
         confettiNumber: 500,
       });
@@ -213,7 +212,8 @@ export default function Page() {
 
   const copyUrlToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      if (typeof window !== "undefined")
+        await navigator.clipboard.writeText(window.location.href);
       enqueueSnackbar<"success">("모바일 청첩장 URL이 복사되었습니다!", {
         variant: "success",
       });
@@ -229,7 +229,7 @@ export default function Page() {
     const latitude = 37.759027;
     const longitude = 126.774992;
     const kakaoMapUrl = `https://map.kakao.com/link/map/${latitude},${longitude}`;
-    window.open(kakaoMapUrl, "_blank");
+    if (typeof window !== "undefined") window.open(kakaoMapUrl, "_blank");
   };
 
   return (
@@ -383,8 +383,8 @@ export default function Page() {
           <VisitorBox>방명록</VisitorBox>
           <CommentContainer>
             {comments &&
-              comments?.map((comment: any) => (
-                <div key={comment.id}>
+              comments?.map((comment: any, index: number) => (
+                <div key={index}>
                   <h5>{comment.name}</h5>
                   <p>{comment.comment}</p>
                   <small>{comment.date}</small>

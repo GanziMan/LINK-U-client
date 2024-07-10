@@ -26,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <head>
         {/* favicon */}
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
         <link
           rel="apple-touch-icon"
