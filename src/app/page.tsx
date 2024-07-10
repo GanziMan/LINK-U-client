@@ -174,8 +174,21 @@ export default function Page() {
     const existingPage = commentPage?.pages[page - 1];
     if (!existingPage) {
       if (page < currentPage) {
-        await fetchPreviousPage();
+        if (Math.abs(page - currentPage) > 1) {
+          for (let i = 0; i < Math.abs(page - currentPage); i++) {
+            await fetchPreviousPage();
+          }
+        } else {
+          await fetchPreviousPage();
+        }
       } else {
+        if (Math.abs(page - currentPage) > 1) {
+          for (let i = 0; i < Math.abs(page - currentPage); i++) {
+            await fetchNextPage();
+          }
+        } else {
+          await fetchNextPage();
+        }
         const lastPage = commentPage?.pages[page - 2];
         if (lastPage) {
           await fetchNextPage();
@@ -184,19 +197,19 @@ export default function Page() {
     }
   };
 
-  // const { mutate: commentMutation } = useMutation({
-  //   mutationFn: createComment,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: ["comment"],
-  //     });
+  const { mutate: commentMutation } = useMutation({
+    mutationFn: createComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["comment"],
+      });
 
-  //     enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
-  //   },
-  //   onError: () => {
-  //     enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
-  //   },
-  // });
+      enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
+    },
+    onError: () => {
+      enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
+    },
+  });
 
   const copyUrlToClipboard = async () => {
     try {
@@ -375,17 +388,10 @@ export default function Page() {
                   <h5>{comment.name}</h5>
                   <p>{comment.comment}</p>
                   <small>{comment.date}</small>
+                  <hr />
                 </div>
               ))}
-            {/* {hasNextPage && (
-              <Box onClick={() => fetchNextPage()}>
-                {isFetchingNextPage ? (
-                  <CircularProgress size={30} sx={{ margin: "0 auto" }} />
-                ) : (
-                  "더 보기"
-                )}
-              </Box>
-            )} */}
+
             <PaginationComponent
               count={commentPage?.pages[0]?.data?.totalPages!}
               page={currentPage}
@@ -397,7 +403,7 @@ export default function Page() {
               initialValues={initialValues}
               validationSchema={toFormikValidationSchema(createCommentSchema)}
               onSubmit={(value) => {
-                // commentMutation(value);
+                commentMutation(value);
               }}
             >
               {({ isSubmitting, dirty, getFieldProps }) => (
@@ -425,7 +431,7 @@ export default function Page() {
                   </CommentWriteBox>
                   <button
                     type="submit"
-                    disabled={dirty}
+                    // disabled={dirty}
                     style={{
                       borderRadius: "4px",
                       width: 100,
