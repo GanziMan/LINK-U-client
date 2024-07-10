@@ -1,5 +1,5 @@
-import { Box, styled } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Box, styled } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 
 const BackgroundMusic: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -8,30 +8,38 @@ const BackgroundMusic: React.FC = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.error("Audio playback failed:", error);
-      });
+      audio
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Audio playback failed:", error);
+        });
     }
   }, []);
 
   const handlePlayMusic = () => {
     const audio = audioRef.current;
     if (audio) {
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.error("Audio playback failed:", error);
-      });
+      audio
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Audio playback failed:", error);
+        });
     }
   };
 
   return (
-    <PlayButton >
+    <PlayButton>
       {!isPlaying ? (
         <button onClick={handlePlayMusic}>배경음악을 눌러주세요.</button>
-      ) : <>Love</>}
+      ) : (
+        <>Love</>
+      )}
       <audio ref={audioRef} loop>
         <source src="/music/wedding-bgm.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
@@ -40,22 +48,20 @@ const BackgroundMusic: React.FC = () => {
   );
 };
 
-
 const PlayButton = styled(Box)(() => {
-    return {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      color: "rgb(70, 65, 61)",
-      fontSize: "16px",
-      lineHeight: "26px",
-      width: 230,
-      background:"#f1e0ce",
-      height: 46,
-      borderRadius: "100px",
-      fontWeight: 600,
-    };
-  });
-  
+  return {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "rgb(70, 65, 61)",
+    fontSize: "16px",
+    lineHeight: "26px",
+    width: 230,
+    background: "#f1e0ce",
+    height: 46,
+    borderRadius: "100px",
+    fontWeight: 600,
+  };
+});
 
 export default BackgroundMusic;

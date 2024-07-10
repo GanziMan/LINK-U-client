@@ -59,22 +59,24 @@ export default function CommonAccordion({
   );
 }
 
-const AccordionST = styled(Accordion)(
-  ({ backgroundColor }: { backgroundColor: string }) => {
-    return {
-      width: 327,
-      borderTopLeftRadius: "4px",
-      borderTopRightRadius: "4px",
-      background: backgroundColor,
-      "&.MuiPaper-root": {
-        boxShadow: "none", // box-shadow 제거
-      },
-      "&.MuiAccordion-root::before": {
-        display: "none", // ::before 의사 요소 제거
-      },
-    };
-  }
-);
+const AccordionST = styled(Accordion)(({
+  backgroundColor,
+}: {
+  backgroundColor: string;
+}) => {
+  return {
+    width: 327,
+    borderTopLeftRadius: "4px",
+    borderTopRightRadius: "4px",
+    background: backgroundColor,
+    "&.MuiPaper-root": {
+      boxShadow: "none", // box-shadow 제거
+    },
+    "&.MuiAccordion-root::before": {
+      display: "none", // ::before 의사 요소 제거
+    },
+  };
+});
 
 const AccordionDetailsST = styled(AccordionDetails)(() => {
   return {

@@ -125,24 +125,26 @@ export const ShareBox = styled(Box)(() => {
   };
 });
 
-export const ShareButton = styled(Box)(
-  ({ background }: { background: string }) => {
-    return {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      color: "rgb(70, 65, 61)",
-      background: background,
-      cursor: "pointer",
-      fontSize: "16px",
-      lineHeight: "26px",
-      width: 230,
-      height: 46,
-      borderRadius: "100px",
-      fontWeight: 600,
-    };
-  }
-);
+export const ShareButton = styled(Box)(({
+  background,
+}: {
+  background: string;
+}) => {
+  return {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "rgb(70, 65, 61)",
+    background: background,
+    cursor: "pointer",
+    fontSize: "16px",
+    lineHeight: "26px",
+    width: 230,
+    height: 46,
+    borderRadius: "100px",
+    fontWeight: 600,
+  };
+});
 
 export const HeartBox = styled(Box)(() => {
   return {
@@ -188,6 +190,10 @@ export const VisitorBox = styled(Box)(() => {
 
 export const CommentContainer = styled(Box)(() => {
   return {
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
     borderRadius: "4px",
     border: "1px solid #f1e0ce",
     width: "100%",
@@ -255,6 +261,7 @@ export const CommentWriteTextBox = styled(TextField)(() => {
     "& .MuiOutlinedInput-root fieldset": {
       border: "1px solid #f1e0ce",
     },
+
     // "&.MuiInputLabel-root": {
     //   top: "50%",
     //   transform: "translateY(-50%)",

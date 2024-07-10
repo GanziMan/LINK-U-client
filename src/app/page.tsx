@@ -4,7 +4,7 @@ import CommonAccordion from "@/components/Accordion";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import JSConfetti from "js-confetti";
 import Image from "next/image";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
@@ -19,7 +19,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { getComments } from "@/features/invitation/getComments";
+import { pageComments } from "@/features/invitation/pageComments";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import {
   AccountBox,
@@ -55,8 +55,9 @@ import {
 import { createComment } from "@/features/invitation/createComment";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { createCommentSchema } from "@/features/invitation/schema";
-import { useState } from "react";
 import { number } from "zod";
+import PaginationComponent from "@/components/Pagination";
+import { useEffect, useState } from "react";
 
 interface CommentFormValues {
   name: string;
@@ -119,7 +120,9 @@ export default function Page() {
   const queryClient = useQueryClient();
   const jsConfetti = new JSConfetti();
 
-  const [cursor, setCursor] = useState<number>(0);
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const { data: likeCount } = useQuery({
     queryKey: ["like-count"],
@@ -136,19 +139,27 @@ export default function Page() {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: [""],
-    queryFn: ({ pageParam = 1 }) =>
-      getComments({ cursor: cursor, take: pageParam }),
+    queryKey: ["comment-page"],
+    queryFn: ({ pageParam = 1 }) => pageComments({ cursor: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      setCursor(lastPage?.data?.nextCursor!);
       return lastPage?.data?.nextCursor || null;
     },
     getPreviousPageParam: (firstPage, allPages) => {
-      setCursor(firstPage?.data?.nextCursor!);
       return firstPage?.data?.nextCursor || null;
     },
   });
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+  };
+
+  const comments = commentPage?.pages[0]?.data?.comments || [];
+
+  console.log(commentPage);
 
   const { mutate: likeCountMutation } = useMutation({
     mutationFn: async () => await updateCount({ id: "1" }),
@@ -202,6 +213,13 @@ export default function Page() {
     window.open(kakaoMapUrl, "_blank");
   };
 
+  useEffect(() => {
+    if (commentPage) {
+      if (commentPage.pages[0]?.data?.totalPages !== totalPages) {
+        setTotalPages(commentPage.pages[0]?.data?.totalPages!);
+      }
+    }
+  }, [currentPage, fetchNextPage, commentPage]);
   return (
     <SnackbarProvider
       autoHideDuration={1000}
@@ -352,16 +370,28 @@ export default function Page() {
           </ShareBox>
           <VisitorBox>방명록</VisitorBox>
           <CommentContainer>
-            {/* {commentData?.map((comment: CommentType) => {
-              return (
-                <CommentWrapper id={comment.nextCursor}>
-                  <CommentNameBox>{comment.name}</CommentNameBox>
-
-                  <CommentContentBox>{comment.comment}</CommentContentBox>
-                  <CommentDateBox>{comment.date}</CommentDateBox>
-                </CommentWrapper>
-              );
-            })} */}
+            {comments &&
+              comments?.map((comment: any) => (
+                <div key={comment.id}>
+                  <h5>{comment.name}</h5>
+                  <p>{comment.comment}</p>
+                  <small>{comment.date}</small>
+                </div>
+              ))}
+            {/* {hasNextPage && (
+              <Box onClick={() => fetchNextPage()}>
+                {isFetchingNextPage ? (
+                  <CircularProgress size={30} sx={{ margin: "0 auto" }} />
+                ) : (
+                  "더 보기"
+                )}
+              </Box>
+            )} */}
+            <PaginationComponent
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+            />
           </CommentContainer>
           <Box width={"100%"}>
             <Formik
