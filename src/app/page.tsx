@@ -120,10 +120,7 @@ export default function Page() {
   const queryClient = useQueryClient();
   const jsConfetti = new JSConfetti();
 
-  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
   const { data: likeCount } = useQuery({
     queryKey: ["like-count"],
     queryFn: async () => {
@@ -135,32 +132,23 @@ export default function Page() {
   const {
     data: commentPage,
     fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
+    fetchPreviousPage,
   } = useInfiniteQuery({
-    queryKey: ["comment-page"],
-    queryFn: ({ pageParam = 1 }) => pageComments({ cursor: pageParam }),
+    queryKey: [`comment-page`],
+    queryFn: ({ pageParam = null }) => pageComments({ cursor: pageParam }),
     initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage) => {
       return lastPage?.data?.nextCursor || null;
     },
-    getPreviousPageParam: (firstPage, allPages) => {
+    getPreviousPageParam: (firstPage) => {
       return firstPage?.data?.nextCursor || null;
     },
   });
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    page: number
-  ) => {
-    setCurrentPage(page);
-  };
+  const comments = commentPage?.pages[currentPage - 1]?.data?.comments || [];
 
-  const comments = commentPage?.pages[0]?.data?.comments || [];
-
+  console.log(currentPage);
   console.log(commentPage);
-
   const { mutate: likeCountMutation } = useMutation({
     mutationFn: async () => await updateCount({ id: "1" }),
     onSuccess: () => {
@@ -177,6 +165,26 @@ export default function Page() {
       enqueueSnackbar("좋아요 업데이트 오류", { variant: "error" });
     },
   });
+
+  const handlePageChange = async (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+
+    // 이미 로드된 페이지인지 확인
+    const existingPage = commentPage?.pages[page - 1];
+    if (!existingPage) {
+      if (page < currentPage) {
+        await fetchPreviousPage();
+      } else {
+        const lastPage = commentPage?.pages[page - 2];
+        if (lastPage) {
+          await fetchNextPage();
+        }
+      }
+    }
+  };
 
   // const { mutate: commentMutation } = useMutation({
   //   mutationFn: createComment,
@@ -213,13 +221,6 @@ export default function Page() {
     window.open(kakaoMapUrl, "_blank");
   };
 
-  useEffect(() => {
-    if (commentPage) {
-      if (commentPage.pages[0]?.data?.totalPages !== totalPages) {
-        setTotalPages(commentPage.pages[0]?.data?.totalPages!);
-      }
-    }
-  }, [currentPage, fetchNextPage, commentPage]);
   return (
     <SnackbarProvider
       autoHideDuration={1000}
@@ -388,7 +389,7 @@ export default function Page() {
               </Box>
             )} */}
             <PaginationComponent
-              count={totalPages}
+              count={commentPage?.pages[0]?.data?.totalPages!}
               page={currentPage}
               onChange={handlePageChange}
             />
