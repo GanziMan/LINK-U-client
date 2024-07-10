@@ -30,7 +30,7 @@ export async function pageComments(
   const data = await prisma.comments.findMany({
     skip: cursor ? 1 : 0,
     cursor: cursor ? { id: cursor } : undefined,
-    take: 5,
+    take: 3,
     select: {
       id: true,
       name: true,
@@ -40,7 +40,7 @@ export async function pageComments(
   });
 
   const totalComments = await prisma.comments.count();
-  const totalPages = Math.ceil(totalComments / 5);
+  const totalPages = Math.ceil(totalComments / 3);
 
   const formattedData = data.map((comment) => {
     return {
