@@ -4,7 +4,7 @@ import CommonAccordion from "@/components/Accordion";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import JSConfetti from "js-confetti";
 import Image from "next/image";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
@@ -132,6 +132,7 @@ export default function Page() {
     data: commentPage,
     fetchNextPage,
     fetchPreviousPage,
+    isFetching,
   } = useInfiniteQuery({
     queryKey: [`comment-page`],
     queryFn: ({ pageParam = null }) => pageComments({ cursor: pageParam }),
@@ -382,6 +383,18 @@ export default function Page() {
           </ShareBox>
           <VisitorBox>방명록</VisitorBox>
           <CommentContainer>
+            {isFetching && (
+              <CircularProgress
+                sx={{
+                  position: "absolute",
+                  transform: "translate(-50%, -50%)",
+                  top: "50%",
+                  left: "50%",
+                  color: "#f1e0ce",
+                }}
+                size={30}
+              />
+            )}
             {comments &&
               comments?.map((comment: any, index: number) => (
                 <div key={index}>
