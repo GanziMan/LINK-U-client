@@ -27,8 +27,9 @@ export async function pageComments(
   }
   const { cursor } = validated.data;
 
+  console.log(cursor);
   const data = await prisma.comments.findMany({
-    skip: cursor ? 1 : 0,
+    skip: cursor !== 0 ? 1 : 0,
     cursor: cursor ? { id: cursor } : undefined,
     take: 3,
     select: {
@@ -52,6 +53,7 @@ export async function pageComments(
 
   const nextCursor = data.length > 0 ? data[data.length - 1].id : null;
 
+  console.log(data);
   if (data)
     return {
       status: "200",
