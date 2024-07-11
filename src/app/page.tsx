@@ -136,7 +136,7 @@ export default function Page() {
   } = useInfiniteQuery({
     queryKey: [`comment-page`],
     queryFn: ({ pageParam = null }) => pageComments({ cursor: pageParam }),
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage?.data?.nextCursor || null;
     },
