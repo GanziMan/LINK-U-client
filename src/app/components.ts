@@ -190,12 +190,12 @@ export const CommentContainer = styled(Box)(() => {
   return {
     padding: "20px",
     display: "flex",
+    position: "relative",
     flexDirection: "column",
     gap: "20px",
     borderRadius: "4px",
     border: "1px solid #f1e0ce",
     width: "100%",
-    position: "relative",
     height: 350,
   };
 });
