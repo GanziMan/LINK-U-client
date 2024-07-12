@@ -415,11 +415,12 @@ export default function Page() {
             <Formik
               initialValues={initialValues}
               validationSchema={toFormikValidationSchema(createCommentSchema)}
-              onSubmit={(value) => {
+              onSubmit={(value, { resetForm }) => {
                 commentMutation(value);
+                resetForm();
               }}
             >
-              {({ isSubmitting, dirty, getFieldProps }) => (
+              {({ getFieldProps }) => (
                 <Form>
                   <CommentWriteBox>
                     <CommentWriteNameBox>
@@ -436,7 +437,9 @@ export default function Page() {
                     </CommentWriteNameBox>
                     <CommentWriteContentBox>
                       <CommentWriteTextAreaBox
+                        maxLength={98}
                         minRows={3}
+                        maxRows={3}
                         placeholder="하고 싶은 말을 전하세요."
                         {...getFieldProps("comment")}
                       />
