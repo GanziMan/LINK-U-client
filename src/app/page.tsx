@@ -11,6 +11,7 @@ import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ShareKakao from "@/components/ShareKakao";
 import { getCount } from "@/features/invitation/getCount";
 import { updateCount } from "@/features/invitation/updateCount";
+import LinesEllipsis from "react-lines-ellipsis";
 
 import {
   useInfiniteQuery,
@@ -399,7 +400,15 @@ export default function Page() {
               comments?.map((comment: any, index: number) => (
                 <div key={index}>
                   <h5>{comment.name}</h5>
-                  <p>{comment.comment}</p>
+
+                  <LinesEllipsis
+                    text={comment.comment}
+                    maxLine="3"
+                    ellipsis="..."
+                    trimRight
+                    basedOn="letters"
+                    component="p"
+                  />
                   <small>{comment.date}</small>
                   <hr />
                 </div>
