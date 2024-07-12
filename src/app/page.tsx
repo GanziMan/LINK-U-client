@@ -453,8 +453,8 @@ export default function Page() {
                       width: 100,
                       height: 40,
                       float: "right",
-                      border: "1px solid #f1e0ce",
-                      color: "#f1e0ce",
+                      background: "#f1e0ce",
+                      color: "white",
                       marginTop: "30px",
                     }}
                   >

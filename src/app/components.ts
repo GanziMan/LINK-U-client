@@ -289,7 +289,6 @@ export const CommentWriteContentBox = styled(Box)(() => {
 export const CommentWriteTextAreaBox = styled(TextareaAutosize)(() => {
   return {
     width: "100%",
-    height: 1000,
     border: "1px solid #f1e0ce",
     borderRadius: "4px",
     padding: "16.5px 14px",
