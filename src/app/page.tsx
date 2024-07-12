@@ -403,7 +403,7 @@ export default function Page() {
 
                   <LinesEllipsis
                     text={comment.comment}
-                    maxLine="3"
+                    maxLine="1"
                     ellipsis="..."
                     trimRight
                     basedOn="letters"
