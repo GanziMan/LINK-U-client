@@ -202,7 +202,7 @@ export default function Page() {
     mutationFn: createComment,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["comment"],
+        queryKey: ["comment-page"],
       });
 
       enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
