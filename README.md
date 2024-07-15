@@ -28,11 +28,6 @@ $ npm run dev
 $ npm start
 ```
 
-# ✏️ ERD Diagram
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img width="500" alt="centered image" src="https://github.com/FewMercy/checkuree/assets/117077999/9d23cbc9-33a0-4850-8ed3-787f0519695e">
-</div>
-
 # ⚒️ Stacks
 ## Front-End
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white)
