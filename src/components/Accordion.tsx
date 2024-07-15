@@ -22,7 +22,7 @@ export default function CommonAccordion({
   gender: string;
 }) {
   return (
-    <AccordionST backgroundColor={backgroundColor}>
+    <AccordionST backgroundcolor={backgroundColor}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1-content"
@@ -33,7 +33,7 @@ export default function CommonAccordion({
           <Image src={genderImageUrl} alt="" width={50} height={50} />
         </GenderBox>
       </AccordionSummary>
-      <AccordionDetailsST borderInnerColor={backgroundColor}>
+      <AccordionDetailsST borderinnercolor={backgroundColor}>
         <AccordionDetailsInner>
           {AccountInfo.map((account, index) => {
             return (
@@ -59,36 +59,32 @@ export default function CommonAccordion({
   );
 }
 
-const AccordionST = styled(Accordion)(({
-  backgroundColor,
-}: {
-  backgroundColor: string;
-}) => {
-  return {
-    width: 327,
-    borderTopLeftRadius: "4px",
-    borderTopRightRadius: "4px",
-    background: backgroundColor,
-    "&.MuiPaper-root": {
-      boxShadow: "none", // box-shadow 제거
-    },
-    "&.MuiAccordion-root::before": {
-      display: "none", // ::before 의사 요소 제거
-    },
-  };
-});
+const AccordionST = styled(Accordion)(
+  ({ backgroundcolor }: { backgroundcolor: string }) => {
+    return {
+      width: 327,
+      borderTopLeftRadius: "4px",
+      borderTopRightRadius: "4px",
+      background: backgroundcolor,
+      "&.MuiPaper-root": {
+        boxShadow: "none", // box-shadow 제거
+      },
+      "&.MuiAccordion-root::before": {
+        display: "none", // ::before 의사 요소 제거
+      },
+    };
+  }
+);
 
-const AccordionDetailsST = styled(AccordionDetails)(({
-  borderInnerColor,
-}: {
-  borderInnerColor: string;
-}) => {
-  return {
-    background: "white",
-    padding: "16px",
-    border: `1px solid ${borderInnerColor}`,
-  };
-});
+const AccordionDetailsST = styled(AccordionDetails)(
+  ({ borderinnercolor }: { borderinnercolor: string }) => {
+    return {
+      background: "white",
+      padding: "16px",
+      border: `1px solid ${borderinnercolor}`,
+    };
+  }
+);
 
 const AccordionDetailsInner = styled(Box)(() => {
   return {

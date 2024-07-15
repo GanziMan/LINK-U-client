@@ -13,7 +13,7 @@ export const InvitaionContainer = styled(Box)(() => {
 
 export const InvitaionWrapper = styled(Box)(() => {
   return {
-    padding: "50px 20px 50px 20px",
+    padding: "50px 0px",
     width: 390,
     gap: "30px",
     background: "white",
@@ -190,12 +190,12 @@ export const CommentContainer = styled(Box)(() => {
   return {
     padding: "20px",
     display: "flex",
+    position: "relative",
     flexDirection: "column",
     gap: "20px",
     borderRadius: "4px",
     border: "1px solid #f1e0ce",
     width: "100%",
-    position: "relative",
     height: 350,
   };
 });
@@ -289,7 +289,6 @@ export const CommentWriteContentBox = styled(Box)(() => {
 export const CommentWriteTextAreaBox = styled(TextareaAutosize)(() => {
   return {
     width: "100%",
-    height: 1000,
     border: "1px solid #f1e0ce",
     borderRadius: "4px",
     padding: "16.5px 14px",

@@ -5,7 +5,6 @@ import Script from "next/script";
 import ClientProvider from "./providers/queryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "모바일 청첩장",
   description: "소중한 사람들을 초대합니다.",
@@ -59,6 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env
             .NEXT_PUBLIC_KAKAO_API_KEY!}&autoload=false`}
         />
+
         <Script
           type="text/javascript"
           strategy="afterInteractive"

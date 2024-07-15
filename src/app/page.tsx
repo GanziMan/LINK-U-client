@@ -4,13 +4,14 @@ import CommonAccordion from "@/components/Accordion";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import KakaoMap from "@/components/KakaoMap";
 import CommonSwiper from "@/components/Swiper";
-import { Box } from "@mui/material";
+import { Box, CircularProgress, styled } from "@mui/material";
 import JSConfetti from "js-confetti";
 import Image from "next/image";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ShareKakao from "@/components/ShareKakao";
 import { getCount } from "@/features/invitation/getCount";
 import { updateCount } from "@/features/invitation/updateCount";
+import LinesEllipsis from "react-lines-ellipsis";
 
 import {
   useInfiniteQuery,
@@ -46,7 +47,7 @@ import {
   VisitorBox,
   WeddingImageText,
   WeddingImageWrapper,
-} from "./components";
+} from "./styles";
 import { createComment } from "@/features/invitation/createComment";
 import { Formik, Form } from "formik";
 import { createCommentSchema } from "@/features/invitation/schema";
@@ -79,34 +80,34 @@ export interface CommentType {
 const GroomAccountInfo: AccountInfoType[] = [
   {
     position: "신랑",
-    name: "김호영",
+    name: " ⃝ ⃝ ⃝",
     accountInfo: "카카오뱅크 0000-11-000000",
   },
   {
     position: "아버지",
-    name: "김명래",
+    name: " ⃝ ⃝ ⃝",
     accountInfo: "카카오뱅크 0000-11-000000",
   },
   {
     position: "어머니",
-    name: "undefined",
+    name: " ⃝ ⃝ ⃝",
     accountInfo: "카카오뱅크 0000-11-000000",
   },
 ];
 const BrideAccountInfo: AccountInfoType[] = [
   {
     position: "신부",
-    name: "김도현",
+    name: " ⃝ ⃝ ⃝",
     accountInfo: "카카오뱅크 0000-11-000000",
   },
   {
     position: "아버지",
-    name: "김동욱",
+    name: " ⃝ ⃝ ⃝",
     accountInfo: "카카오뱅크 0000-11-000000",
   },
   {
     position: "어머니",
-    name: "김명숙",
+    name: " ⃝ ⃝ ⃝ ",
     accountInfo: "카카오뱅크 0000-11-000000",
   },
 ];
@@ -132,10 +133,11 @@ export default function Page() {
     data: commentPage,
     fetchNextPage,
     fetchPreviousPage,
+    isFetching,
   } = useInfiniteQuery({
     queryKey: [`comment-page`],
     queryFn: ({ pageParam = null }) => pageComments({ cursor: pageParam }),
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage?.data?.nextCursor || null;
     },
@@ -200,7 +202,7 @@ export default function Page() {
     mutationFn: createComment,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["comment"],
+        queryKey: ["comment-page"],
       });
 
       enqueueSnackbar("댓글이 등록되었습니다.", { variant: "success" });
@@ -253,12 +255,12 @@ export default function Page() {
             <WeddingImageText>Wedding Invitation</WeddingImageText>
           </WeddingImageWrapper>
           <InviteText>
-            <strong>도현이</strong>와 <strong>호영이</strong>의 결혼식에 소중한
+            <strong> ⃝ ⃝ ⃝</strong> • <strong> ⃝ ⃝ ⃝ </strong>의 결혼식에 소중한
             분들을 초대합니다.
           </InviteText>
           25.02.15.SAT
-          <Image
-            src={"/images/image/gay.jpeg"}
+          <BoxImage
+            src={"/images/wedding/wedding-3.jpeg"}
             alt=""
             width={328}
             height={328}
@@ -276,25 +278,26 @@ export default function Page() {
           <DivideLine />
           <ParentText>
             <Box>
-              정이름 &bull; 김명래 의 아들 <strong>호영</strong>
+              정이름 &bull; ⃝ ⃝ ⃝ 의 아들 <strong> ⃝ ⃝ ⃝</strong>
             </Box>
             <Box>
-              김동욱 &bull; 김명숙 의 딸 <strong>도현</strong>
+              김이름 &bull; ⃝ ⃝ ⃝ 의 딸 <strong> ⃝ ⃝ ⃝</strong>
             </Box>
           </ParentText>
           <DivideLine />
           <LocationText>
-            2025년 2월 15일 토요일 오후 12시 파주 통돼지 바베큐집
+            2025년 2월 15일 토요일 오후 12시 ⃝ ⃝ ⃝ 웨딩홀
           </LocationText>
-          <Image
-            src={"/images/icons/champagne-icon.svg"}
-            alt=""
-            width={50}
-            height={50}
-            style={{
-              marginLeft: "auto",
+          <Box
+            sx={{
+              color: "#e5ac53",
+              fontFamily: "WONBatang",
+              fontSize: "19px",
+              lineHeight: "22px",
             }}
-          />
+          >
+            Album
+          </Box>
           <CommonSwiper />
           <AccountBox>
             <Image
@@ -326,33 +329,42 @@ export default function Page() {
             />
             <AccountBoxText>오시는 길</AccountBoxText>
           </Box>
-          <LocationNameBox>경기도 파주시 통돼지 바베큐집</LocationNameBox>
-          <LocationTextBox>(파주시 금촌로 16가길 889)</LocationTextBox>
+          <LocationNameBox> ⃝ ⃝도 ⃝ ⃝시 ⃝ ⃝ ⃝ 웨딩홀</LocationNameBox>
+          <LocationTextBox>( ⃝ ⃝시 ⃝ ⃝로 ⃝ ⃝가길 ⃝ ⃝ ⃝)</LocationTextBox>
           <KakaoMap />
-          <KakaoMapButton onClick={() => kakaoMap()}>
-            카카오맵에서 보기
-          </KakaoMapButton>
-          <Box display={"flex"} flexDirection={"column"} gap={"20px"}>
-            <Box>
-              <GuideBox>주차안내</GuideBox>
-              <Box color={"#594739"}> 파주 통돼지집 내 주차장 이용</Box>
-              <Box color={"#7A3D0C"}>
-                * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
+          <Box
+            sx={{
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <KakaoMapButton onClick={() => kakaoMap()}>
+              카카오맵에서 보기
+            </KakaoMapButton>
+            <Box display={"flex"} flexDirection={"column"} gap={"20px"}>
+              <Box>
+                <GuideBox>주차안내</GuideBox>
+                <Box color={"#594739"}> ⃝ ⃝ 웨딩홀 내 주차장 이용</Box>
+                <Box color={"#7A3D0C"}>
+                  * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
+                </Box>
               </Box>
-            </Box>
-            <hr />
-            <Box>
-              <GuideBox>지하철</GuideBox>
-              <Box color={"#594739"}>
-                [3호선] 풍산역 2번,3번 출구에서 도보 10분
+              <hr />
+              <Box>
+                <GuideBox>지하철</GuideBox>
+                <Box color={"#594739"}>
+                  [ ⃝ ⃝선] ⃝ ⃝역 2번,3번 출구에서 도보 10분
+                </Box>
               </Box>
-            </Box>
-            <hr />
-            <Box>
-              <GuideBox>버스</GuideBox>
-              <Box color={"#594739"}>
-                파주중학교 또는 일진공원 하차 후 도보 5분 - 간선 141번, 지선
-                2011번, 직행 3600번
+              <hr />
+              <Box>
+                <GuideBox>버스</GuideBox>
+                <Box color={"#594739"}>
+                  ⃝ ⃝중학교 또는 ⃝ ⃝공원 하차 후 도보 5분 - 간선 ⃝ ⃝ ⃝번, 지선
+                  2011번, 직행 3600번
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -382,11 +394,31 @@ export default function Page() {
           </ShareBox>
           <VisitorBox>방명록</VisitorBox>
           <CommentContainer>
+            {isFetching && (
+              <CircularProgress
+                sx={{
+                  position: "absolute",
+                  transform: "translate(-50%, -50%)",
+                  top: "50%",
+                  left: "50%",
+                  color: "#f1e0ce",
+                }}
+                size={30}
+              />
+            )}
             {comments &&
               comments?.map((comment: any, index: number) => (
                 <div key={index}>
                   <h5>{comment.name}</h5>
-                  <p>{comment.comment}</p>
+
+                  <LinesEllipsis
+                    text={comment.comment}
+                    maxLine="1"
+                    ellipsis="..."
+                    trimRight
+                    basedOn="letters"
+                    component="p"
+                  />
                   <small>{comment.date}</small>
                   <hr />
                 </div>
@@ -398,15 +430,16 @@ export default function Page() {
               onChange={handlePageChange}
             />
           </CommentContainer>
-          <Box width={"100%"}>
+          <Box width={"100%"} padding={"20px"}>
             <Formik
               initialValues={initialValues}
               validationSchema={toFormikValidationSchema(createCommentSchema)}
-              onSubmit={(value) => {
+              onSubmit={(value, { resetForm }) => {
                 commentMutation(value);
+                resetForm();
               }}
             >
-              {({ isSubmitting, dirty, getFieldProps }) => (
+              {({ getFieldProps }) => (
                 <Form>
                   <CommentWriteBox>
                     <CommentWriteNameBox>
@@ -423,7 +456,9 @@ export default function Page() {
                     </CommentWriteNameBox>
                     <CommentWriteContentBox>
                       <CommentWriteTextAreaBox
+                        maxLength={98}
                         minRows={3}
+                        maxRows={3}
                         placeholder="하고 싶은 말을 전하세요."
                         {...getFieldProps("comment")}
                       />
@@ -437,8 +472,8 @@ export default function Page() {
                       width: 100,
                       height: 40,
                       float: "right",
-                      border: "1px solid #f1e0ce",
-                      color: "#f1e0ce",
+                      background: "#f1e0ce",
+                      color: "white",
                       marginTop: "30px",
                     }}
                   >
@@ -453,3 +488,9 @@ export default function Page() {
     </SnackbarProvider>
   );
 }
+
+const BoxImage = styled(Image)(() => {
+  return {
+    width: "100%",
+  };
+});
