@@ -1,23 +1,16 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { color, motion, Variants } from "framer-motion";
 import { CommonContainer, MainContentBox, MainContentText } from "../styles";
 import { Box } from "@mui/material";
+import MenuBar from "@/components/MenuBar";
 
 // menubar framer
 
-const itemVariants: Variants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 300, damping: 24 },
-  },
-  closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
-};
-
 const Section2: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
@@ -31,6 +24,17 @@ const Section2: React.FC = () => {
         delay: i * 0.5,
       },
     }),
+  };
+
+  const buttonVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: words.length * 0.5,
+      },
+    },
   };
 
   useEffect(() => {
@@ -85,6 +89,16 @@ const Section2: React.FC = () => {
             ))}
           </Box>
         </MainContentText>
+        <motion.div
+          // variants={buttonVariant}
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <MenuBar />
+        </motion.div>
       </MainContentBox>
     </CommonContainer>
   );
