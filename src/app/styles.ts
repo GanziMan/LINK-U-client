@@ -13,7 +13,7 @@ export const InvitaionContainer = styled(Box)(() => {
 
 export const InvitaionWrapper = styled(Box)(() => {
   return {
-    padding: "50px 20px 50px 20px",
+    padding: "50px 0px",
     width: 390,
     gap: "30px",
     background: "white",
