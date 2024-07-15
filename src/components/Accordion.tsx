@@ -4,11 +4,11 @@ import {
   AccordionSummary,
   Box,
   styled,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { AccountInfoType } from "@/app/page";
-import Image from "next/image";
+} from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import { AccountInfoType } from '@/app/page'
+import Image from 'next/image'
 
 export default function CommonAccordion({
   AccountInfo,
@@ -16,10 +16,10 @@ export default function CommonAccordion({
   genderImageUrl,
   backgroundColor,
 }: {
-  AccountInfo: AccountInfoType[];
-  backgroundColor: string;
-  genderImageUrl: string;
-  gender: string;
+  AccountInfo: AccountInfoType[]
+  backgroundColor: string
+  genderImageUrl: string
+  gender: string
 }) {
   return (
     <AccordionST backgroundcolor={backgroundColor}>
@@ -51,89 +51,93 @@ export default function CommonAccordion({
                   </Box>
                 </AccordionDetailsInnerSection2>
               </Box>
-            );
+            )
           })}
         </AccordionDetailsInner>
       </AccordionDetailsST>
     </AccordionST>
-  );
+  )
 }
 
-const AccordionST = styled(Accordion)(
-  ({ backgroundcolor }: { backgroundcolor: string }) => {
-    return {
-      width: 327,
-      borderTopLeftRadius: "4px",
-      borderTopRightRadius: "4px",
-      background: backgroundcolor,
-      "&.MuiPaper-root": {
-        boxShadow: "none", // box-shadow 제거
-      },
-      "&.MuiAccordion-root::before": {
-        display: "none", // ::before 의사 요소 제거
-      },
-    };
+const AccordionST = styled(Accordion)(({
+  backgroundcolor,
+}: {
+  backgroundcolor: string
+}) => {
+  return {
+    width: 327,
+    borderTopLeftRadius: '4px',
+    borderTopRightRadius: '4px',
+    background: backgroundcolor,
+    '&.MuiPaper-root': {
+      boxShadow: 'none', // box-shadow 제거
+    },
+    '&.MuiAccordion-root::before': {
+      display: 'none', // ::before 의사 요소 제거
+    },
   }
-);
+})
 
-const AccordionDetailsST = styled(AccordionDetails)(
-  ({ borderinnercolor }: { borderinnercolor: string }) => {
-    return {
-      background: "white",
-      padding: "16px",
-      border: `1px solid ${borderinnercolor}`,
-    };
+const AccordionDetailsST = styled(AccordionDetails)(({
+  borderinnercolor,
+}: {
+  borderinnercolor: string
+}) => {
+  return {
+    background: 'white',
+    padding: '16px',
+    border: `1px solid ${borderinnercolor}`,
   }
-);
+})
 
 const AccordionDetailsInner = styled(Box)(() => {
   return {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    gap: "40px",
-  };
-});
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '40px',
+  }
+})
 const AccordionDetailsInnerSection1 = styled(Box)(() => {
   return {
-    fontSize: "16px",
-    lineHeight: "24px",
-  };
-});
+    fontSize: '16px',
+    lineHeight: '24px',
+  }
+})
 
 const AccordionDetailsInnerSection2 = styled(Box)(() => {
   return {
-    display: "flex",
-    justifyContent: "space-between",
-    fontSize: "14px",
-    lineHeight: "24px",
-    alignItems: "center",
-  };
-});
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontSize: '14px',
+    lineHeight: '24px',
+    alignItems: 'center',
+  }
+})
 
 const GenderBox = styled(Box)(() => {
   return {
-    display: "flex",
-    alignItems: "center",
-  };
-});
+    display: 'flex',
+    alignItems: 'center',
+  }
+})
 const AccountWrapper = styled(Box)(() => {
   return {
-    borderRadius: "5px",
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "0px 8px",
-    alignItems: "center",
-    fontSize: "11px",
-    background: "#F3F3F1",
+    borderRadius: '5px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '0px 8px',
+    alignItems: 'center',
+    fontSize: '11px',
+    background: '#F3F3F1',
     width: 78,
     height: 28,
-  };
-});
+  }
+})
 
 const AccountIcon = styled(ContentCopyIcon)(() => {
   return {
     width: 15,
     height: 15,
-  };
-});
+  }
+})
