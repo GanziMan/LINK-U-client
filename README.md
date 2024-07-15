@@ -1,7 +1,7 @@
 * 안녕하세요 ! 사랑하는 사람을 생각하며 만든 모바일 청첩장입니다.
 
 # 🌐 Links
-> **Service** : [https://invitation-three-phi.vercel.app/](https://invitation-three-phi.vercel.app/) <br>
+> **Service** : [모바일 청첩장](https://invitation-three-phi.vercel.app/) <br>
 
 # ⚙️ How to Start
 ## 0️⃣ Prerequisites
