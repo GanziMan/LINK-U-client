@@ -20,16 +20,13 @@ export default function CommonSwiper() {
 
   const SlideData: SlideDataType[] = [
     {
-      imageUrl: "/images/image/gay1.jpeg",
+      imageUrl: "/images/wedding/wedding-1.jpeg",
     },
     {
-      imageUrl: "/images/image/gay2.jpeg",
+      imageUrl: "/images/wedding/wedding-2.jpeg",
     },
     {
-      imageUrl: "/images/image/gay3.jpeg",
-    },
-    {
-      imageUrl: "/images/image/gay4.jpeg",
+      imageUrl: "/images/wedding/wedding-3.jpeg",
     },
   ];
 
