@@ -1,18 +1,23 @@
-import { Box } from "@mui/material";
-import { Form, Formik } from "formik";
+import { Box } from '@mui/material'
+import { Form, Formik } from 'formik'
 
 export default function Page() {
   return (
     <Box
-      width={"100%"}
+      width={'100%'}
       sx={{
-        background: "white",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        background: 'white',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
+      <Box>
+        <Box>
+          <Box></Box>
+        </Box>
+      </Box>
       {/* <Formik
         initialValues={{}}
         onSubmit={(value, { resetForm }) => {
@@ -40,5 +45,5 @@ export default function Page() {
         )}
       </Formik> */}
     </Box>
-  );
+  )
 }
