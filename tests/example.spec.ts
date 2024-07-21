@@ -25,4 +25,9 @@ test.describe('Wedding Invitation Page', () => {
       })
     }
   })
+
+  test('like count button test', async ({ page }) => {
+    const likeCountButton = page.locator('.MuiBox-root css-yg55rv')
+    await likeCountButton.click()
+  })
 })
