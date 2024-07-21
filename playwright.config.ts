@@ -22,7 +22,15 @@ export default defineConfig({
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        launchOptions: {
+          firefoxUserPrefs: {
+            'media.autoplay.default': 0, // Allow all autoplay
+            'media.autoplay.enabled.user-gestures-needed': false, // Disable user gesture requirement
+          },
+        },
+      },
     },
     {
       name: 'webkit',

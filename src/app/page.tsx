@@ -255,10 +255,10 @@ export default function Page() {
             <WeddingImageText>Wedding Invitation</WeddingImageText>
           </WeddingImageWrapper>
           <InviteText>
-            <strong> ⃝ ⃝ ⃝</strong> • <strong> ⃝ ⃝ ⃝ </strong>의 결혼식에 소중한
+            <strong> OOO</strong> • <strong> OOO</strong>의 결혼식에 소중한
             분들을 초대합니다.
           </InviteText>
-          25.02.15.SAT
+          2025년 02월 15일(토)
           <BoxImage
             src={'/images/wedding/wedding-3.jpeg'}
             alt=""
@@ -278,15 +278,15 @@ export default function Page() {
           <DivideLine />
           <ParentText>
             <Box>
-              정이름 &bull; ⃝ ⃝ ⃝ 의 아들 <strong> ⃝ ⃝ ⃝</strong>
+              정이름 &bull; 홍이름 의 아들 <strong>OOO</strong>
             </Box>
             <Box>
-              김이름 &bull; ⃝ ⃝ ⃝ 의 딸 <strong> ⃝ ⃝ ⃝</strong>
+              김이름 &bull; 유이름 의 딸 <strong>OOO</strong>
             </Box>
           </ParentText>
           <DivideLine />
           <LocationText>
-            2025년 2월 15일 토요일 오후 12시 <br />⃝ ⃝ ⃝ 웨딩홀
+            2025년 2월 15일 토요일 오후 12시 <br /> OOO 웨딩홀
           </LocationText>
           <Box
             sx={{
@@ -329,8 +329,8 @@ export default function Page() {
             />
             <AccountBoxText>오시는 길</AccountBoxText>
           </Box>
-          <LocationNameBox> ⃝ ⃝도 ⃝ ⃝시 ⃝ ⃝ ⃝ 웨딩홀</LocationNameBox>
-          <LocationTextBox>( ⃝ ⃝시 ⃝ ⃝로 ⃝ ⃝가길 ⃝ ⃝ ⃝)</LocationTextBox>
+          <LocationNameBox> OO도 OO시 OOO웨딩홀</LocationNameBox>
+          <LocationTextBox>(OO시 OO로 OO가길 OOO)</LocationTextBox>
           <KakaoMap />
           <Box
             sx={{
