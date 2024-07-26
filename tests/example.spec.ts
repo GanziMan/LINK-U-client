@@ -11,14 +11,20 @@ test.describe('Wedding Invitation Page', () => {
     await expect(page).toHaveTitle('모바일 청첩장')
   })
 
+  // 페이지 배경음악 재생 테스트
   test('background music button test', async ({ page, browserName }) => {
     const backgroundMusicButton = page.locator(
       'button:has-text("배경음악을 눌러주세요.")'
     )
 
-    if (browserName !== 'firefox') {
+    if (browserName === 'webkit') {
       await backgroundMusicButton.click()
-    } else {
+    } else if (browserName === 'firefox') {
+      await page.evaluate(() => {
+        const audio = new Audio('/music/wedding-bgm.mp3')
+        audio.play()
+      })
+    } else if (browserName === 'chromium') {
       await page.evaluate(() => {
         const audio = new Audio('/music/wedding-bgm.mp3')
         audio.play()
@@ -26,8 +32,14 @@ test.describe('Wedding Invitation Page', () => {
     }
   })
 
+  // 페이지 좋아요 수 테스트
   test('like count button test', async ({ page }) => {
-    const likeCountButton = page.locator('.MuiBox-root css-yg55rv')
-    await likeCountButton.click()
+    const beforeLikeCount = await page.locator('#like-count').innerText()
+
+    await page.click('#heart-box')
+
+    const afterLikeCount = await page.locator('#like-count').innerText()
+
+    expect(Number(afterLikeCount) === Number(beforeLikeCount + 1))
   })
 })
