@@ -369,8 +369,8 @@ export default function Page() {
             </Box>
           </Box>
           <ShareBox>
-            <HeartBox onClick={() => likeCountMutation()}>
-              <HeartCountBox>{likeCount}</HeartCountBox>
+            <HeartBox onClick={() => likeCountMutation()} id="heart-box">
+              <HeartCountBox id="like-count">{likeCount}</HeartCountBox>
               <Image
                 alt=""
                 src={'/images/icons/heart-icon.svg'}
@@ -445,6 +445,7 @@ export default function Page() {
                     <CommentWriteNameBox>
                       <CommentWriteTextBox
                         placeholder="성함"
+                        id="name"
                         inputProps={{
                           style: {
                             width: 100,
@@ -457,6 +458,7 @@ export default function Page() {
                     <CommentWriteContentBox>
                       <CommentWriteTextAreaBox
                         maxLength={98}
+                        id="comment"
                         minRows={3}
                         maxRows={3}
                         placeholder="하고 싶은 말을 전하세요."
