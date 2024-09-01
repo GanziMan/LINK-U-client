@@ -439,50 +439,53 @@ export default function Page() {
                 resetForm()
               }}
             >
-              {({ getFieldProps }) => (
-                <Form>
-                  <CommentWriteBox>
-                    <CommentWriteNameBox>
-                      <CommentWriteTextBox
-                        placeholder="성함"
-                        id="name"
-                        inputProps={{
-                          style: {
-                            width: 100,
-                            height: 10,
-                          },
-                        }}
-                        {...getFieldProps('name')}
-                      />
-                    </CommentWriteNameBox>
-                    <CommentWriteContentBox>
-                      <CommentWriteTextAreaBox
-                        maxLength={98}
-                        id="comment"
-                        minRows={3}
-                        maxRows={3}
-                        placeholder="하고 싶은 말을 전하세요."
-                        {...getFieldProps('comment')}
-                      />
-                    </CommentWriteContentBox>
-                  </CommentWriteBox>
-                  <button
-                    type="submit"
-                    // disabled={dirty}
-                    style={{
-                      borderRadius: '4px',
-                      width: 100,
-                      height: 40,
-                      float: 'right',
-                      background: '#f1e0ce',
-                      color: 'white',
-                      marginTop: '30px',
-                    }}
-                  >
-                    보내기
-                  </button>
-                </Form>
-              )}
+              {({ getFieldProps, values }) => {
+                console.log(values)
+                return (
+                  <Form>
+                    <CommentWriteBox>
+                      <CommentWriteNameBox>
+                        <CommentWriteTextBox
+                          placeholder="성함"
+                          id="name"
+                          inputProps={{
+                            style: {
+                              width: 100,
+                              height: 10,
+                            },
+                          }}
+                          {...getFieldProps('name')}
+                        />
+                      </CommentWriteNameBox>
+                      <CommentWriteContentBox>
+                        <CommentWriteTextAreaBox
+                          maxLength={98}
+                          id="comment"
+                          minRows={3}
+                          maxRows={3}
+                          placeholder="하고 싶은 말을 전하세요."
+                          {...getFieldProps('comment')}
+                        />
+                      </CommentWriteContentBox>
+                    </CommentWriteBox>
+                    <button
+                      type="submit"
+                      // disabled={dirty}
+                      style={{
+                        borderRadius: '4px',
+                        width: 100,
+                        height: 40,
+                        float: 'right',
+                        background: '#f1e0ce',
+                        color: 'white',
+                        marginTop: '30px',
+                      }}
+                    >
+                      보내기
+                    </button>
+                  </Form>
+                )
+              }}
             </Formik>
           </Box>
         </InvitaionWrapper>
