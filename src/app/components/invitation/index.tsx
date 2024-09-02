@@ -315,7 +315,7 @@ export default function InvitationComponent() {
               <Box>
                 <GuideBox>버스</GuideBox>
                 <Box color={'#594739'}>
-                  ⃝ ⃝중학교 또는 ⃝ ⃝공원 하차 후 도보 5분 - 간선 ⃝ ⃝ ⃝번, 지선
+                  파주중학교 또는 ⃝파주공원 하차 후 도보 5분 - 간선 000번, 지선
                   2011번, 직행 3600번
                 </Box>
               </Box>
