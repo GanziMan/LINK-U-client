@@ -208,7 +208,7 @@ export default function InvitationComponent() {
             <WeddingImageText>Wedding Invitation</WeddingImageText>
           </WeddingImageWrapper>
           <InviteText>
-            <strong> OOO</strong> • <strong> OOO</strong>의 결혼식에 소중한
+            <strong>김범수</strong> • <strong>김범수</strong>의 결혼식에 소중한
             분들을 초대합니다.
           </InviteText>
           2025년 02월 15일(토)
@@ -231,15 +231,15 @@ export default function InvitationComponent() {
           <DivideLine />
           <ParentText>
             <Box>
-              정이름 &bull; 홍이름 의 아들 <strong>OOO</strong>
+              김범수 &bull; 김범수 의 아들 <strong>김범수</strong>
             </Box>
             <Box>
-              김이름 &bull; 유이름 의 딸 <strong>OOO</strong>
+              김범수 &bull; 김범수 의 딸 <strong>김범수</strong>
             </Box>
           </ParentText>
           <DivideLine />
           <LocationText>
-            2025년 2월 15일 토요일 오후 12시 <br /> OOO 웨딩홀
+            2025년 2월 15일 토요일 오후 12시 <br /> 파주 웨딩홀
           </LocationText>
           <Box
             sx={{
@@ -282,8 +282,8 @@ export default function InvitationComponent() {
             />
             <AccountBoxText>오시는 길</AccountBoxText>
           </Box>
-          <LocationNameBox> OO도 OO시 OOO웨딩홀</LocationNameBox>
-          <LocationTextBox>(OO시 OO로 OO가길 OOO)</LocationTextBox>
+          <LocationNameBox> 경기도 파주시 파주웨딩홀</LocationNameBox>
+          <LocationTextBox>(파주시 22로 11111가길 파주웨딩홀)</LocationTextBox>
           <KakaoMap />
           <Box
             sx={{
@@ -299,7 +299,7 @@ export default function InvitationComponent() {
             <Box display={'flex'} flexDirection={'column'} gap={'20px'}>
               <Box>
                 <GuideBox>주차안내</GuideBox>
-                <Box color={'#594739'}> ⃝ ⃝ 웨딩홀 내 주차장 이용</Box>
+                <Box color={'#594739'}> 파주 웨딩홀 내 주차장 이용</Box>
                 <Box color={'#7A3D0C'}>
                   * 신랑/신부가 무료로 제공하는 발렛서비스를 이용하십시오.
                 </Box>
@@ -308,7 +308,7 @@ export default function InvitationComponent() {
               <Box>
                 <GuideBox>지하철</GuideBox>
                 <Box color={'#594739'}>
-                  [ ⃝ ⃝선] ⃝ ⃝역 2번,3번 출구에서 도보 10분
+                  [경의선] 파주역 2번,3번 출구에서 도보 10분
                 </Box>
               </Box>
               <hr />
