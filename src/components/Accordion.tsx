@@ -7,8 +7,9 @@ import {
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
-import { AccountInfoType } from '@/app/page'
+
 import Image from 'next/image'
+import { AccountInfoType } from '@/app/schema/mainPageSchea'
 
 export default function CommonAccordion({
   AccountInfo,
@@ -59,36 +60,32 @@ export default function CommonAccordion({
   )
 }
 
-const AccordionST = styled(Accordion)(({
-  backgroundcolor,
-}: {
-  backgroundcolor: string
-}) => {
-  return {
-    width: 327,
-    borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px',
-    background: backgroundcolor,
-    '&.MuiPaper-root': {
-      boxShadow: 'none', // box-shadow 제거
-    },
-    '&.MuiAccordion-root::before': {
-      display: 'none', // ::before 의사 요소 제거
-    },
+const AccordionST = styled(Accordion)(
+  ({ backgroundcolor }: { backgroundcolor: string }) => {
+    return {
+      width: 327,
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+      background: backgroundcolor,
+      '&.MuiPaper-root': {
+        boxShadow: 'none', // box-shadow 제거
+      },
+      '&.MuiAccordion-root::before': {
+        display: 'none', // ::before 의사 요소 제거
+      },
+    }
   }
-})
+)
 
-const AccordionDetailsST = styled(AccordionDetails)(({
-  borderinnercolor,
-}: {
-  borderinnercolor: string
-}) => {
-  return {
-    background: 'white',
-    padding: '16px',
-    border: `1px solid ${borderinnercolor}`,
+const AccordionDetailsST = styled(AccordionDetails)(
+  ({ borderinnercolor }: { borderinnercolor: string }) => {
+    return {
+      background: 'white',
+      padding: '16px',
+      border: `1px solid ${borderinnercolor}`,
+    }
   }
-})
+)
 
 const AccordionDetailsInner = styled(Box)(() => {
   return {
