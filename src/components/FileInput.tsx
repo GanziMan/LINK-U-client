@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import styled from "@emotion/styled";
-import React, { useState, ChangeEvent } from "react";
+import styled from '@emotion/styled'
+import React, { useState, ChangeEvent } from 'react'
 
 const InputLabel = styled.label`
   background-color: #6200ea;
@@ -19,11 +19,11 @@ const InputLabel = styled.label`
   &:hover {
     background-color: #3700b3;
   }
-`;
+`
 
 const HiddenInput = styled.input`
   display: none;
-`;
+`
 
 const FileNameWrapper = styled.div`
   margin-top: 10px;
@@ -34,7 +34,7 @@ const FileNameWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 const FileName = styled.span`
   font-size: 14px;
@@ -44,54 +44,53 @@ const FileName = styled.span`
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 50;
-`;
+`
 
 interface FileInputProps {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 const FileInput: React.FC<FileInputProps> = ({ onChange }) => {
-  const [preview, setPreview] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(null)
+  const [fileName, setFileName] = useState<string | null>(null)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
 
     if (file) {
       // 파일 형식 확인
-      if (!file.type.startsWith("image/")) {
-        alert("이미지 파일만 업로드할 수 있습니다.");
-        return;
+      if (!file.type.startsWith('image/')) {
+        alert('이미지 파일만 업로드할 수 있습니다.')
+        return
       }
 
       // 파일 크기 확인 (예: 5MB 이하)
-      const maxSizeInBytes = 5 * 1024 * 1024;
+      const maxSizeInBytes = 5 * 1024 * 1024
       if (file.size > maxSizeInBytes) {
-        alert("파일 크기가 너무 큽니다. 5MB 이하의 파일을 업로드해주세요.");
-        return;
+        alert('파일 크기가 너무 큽니다. 5MB 이하의 파일을 업로드해주세요.')
+        return
       }
 
       // 파일 이름 저장
-      setFileName(file.name);
+      setFileName(file.name)
 
       // 파일 읽기 및 미리보기 업데이트
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+        setPreview(reader.result as string)
+      }
+      reader.readAsDataURL(file)
     }
 
     // 부모 컴포넌트로 이벤트 전달
-    onChange(event);
-  };
-  console.log(preview);
+    onChange(event)
+  }
   return (
     <>
       <HiddenInput type="file" id="file-input" onChange={handleFileChange} />
       <div
         style={{
-          display: "flex",
+          display: 'flex',
           width: 600,
         }}
       >
@@ -101,7 +100,7 @@ const FileInput: React.FC<FileInputProps> = ({ onChange }) => {
         <InputLabel htmlFor="file-input">선택</InputLabel>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default FileInput;
+export default FileInput
