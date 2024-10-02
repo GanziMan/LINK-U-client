@@ -1,23 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Script from "next/script";
-import ClientProvider from "./providers/queryClientProvider";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import Script from 'next/script'
+import ClientProvider from './providers/queryClientProvider'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
-  title: "모바일 청첩장",
-  description: "소중한 사람들을 초대합니다.",
-};
+  title: '모바일 청첩장',
+  description: '소중한 사람들을 초대합니다.',
+}
 
 declare global {
   interface Window {
-    Kakao: any;
+    Kakao: any
   }
 }
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -69,5 +69,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ClientProvider>{children}</ClientProvider>
       </body>
     </html>
-  );
+  )
 }
