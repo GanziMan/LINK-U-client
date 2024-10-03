@@ -4,10 +4,51 @@ on:
   push:
     branches:
       - main
-    pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    step:
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3 # actions/checkout을 올바르게 사용
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Node.js 18 버전 설정
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Upload production-ready build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: next-build
+          path: .next
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build # build job이 완료된 후에 실행
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Vercel # Vercel 배포
+        run: npx vercel --prod # Vercel을 통해 배포
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
