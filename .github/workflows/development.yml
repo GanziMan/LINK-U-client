@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Deploy to Vercel # Vercel 배포
-        run: npx vercel --prod # Vercel을 통해 배포
+      - name: Deploy to Vercel
+        run: npx vercel --prod
         env:
           VERCEL_TOKEN: auGwbQRUV8ZwYUbVGwSlfI9y
