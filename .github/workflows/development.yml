@@ -28,6 +28,6 @@ jobs:
         if: ${{ success() }} # 이전 단계가 성공한 경우에만 실행
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }} # 필요에 따라 추가
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }} # 필요에 따라 추가
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: npx vercel --prod --token $VERCEL_TOKEN --confirm
