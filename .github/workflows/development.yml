@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches:
-      - main # main 브랜치에 push될 때만 실행
+      - main
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      - name: Upload production-ready build artifacts # 빌드 결과를 저장
+      - name: Upload production-ready build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: next-build
@@ -52,4 +52,4 @@ jobs:
       - name: Deploy to Vercel
         run: npx vercel --prod
         env:
-          VERCEL_TOKEN: auGwbQRUV8ZwYUbVGwSlfI9y
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Secrets에서 토큰 불러오기
