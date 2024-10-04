@@ -24,7 +24,7 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      - name: Upload production-ready build artifacts # 빌드 결과를 저장
+      - name: Upload production-ready build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: next-build
