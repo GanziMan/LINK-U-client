@@ -48,3 +48,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Deploy to Vercel
+        run: npx vercel --prod
+        env:
+          VERCEL_TOKEN: auGwbQRUV8ZwYUbVGwSlfI9y
