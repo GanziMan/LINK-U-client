@@ -1,4 +1,4 @@
-name: CI Deploy to Vercel
+name: CI
 
 on:
   push:
