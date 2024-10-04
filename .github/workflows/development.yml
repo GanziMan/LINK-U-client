@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # 이 버전은 기본적으로 Node.js 20으로 전환 예정
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3 # Node.js 20을 기본으로 사용하게 됨
         with:
-          node-version: '18' # Node.js 18 버전 사용
+          node-version: '20' # 명시적으로 Node.js 20 사용
 
       - name: Install dependencies
         run: npm install
@@ -35,7 +35,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build # build job이 완료된 후에 실행
+    needs: build # build 작업이 완료된 후 배포 진행
 
     steps:
       - name: Checkout code
@@ -44,7 +44,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # 빌드와 일관성 있게 Node.js 18 사용
+          node-version: '20' # Node.js 20 사용
 
       - name: Install dependencies
         run: npm install
