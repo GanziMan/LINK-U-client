@@ -50,3 +50,7 @@ coverage/
 # Typescript cache
 *.tsbuildinfo
 .vercel
+
+# playwright
+playwright-report
+test-results
