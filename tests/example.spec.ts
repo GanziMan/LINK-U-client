@@ -8,7 +8,7 @@ test.describe('Wedding Invitation Page', () => {
 
   // 페이지 타이틀이 올바른지 확인합니다.
   test('page title text', async ({ page }) => {
-    await expect(page).toHaveTitle('모바일 청첩장')
+    await expect(page).toHaveTitle('Mobile Invitation')
   })
 
   // 페이지 배경음악 재생 테스트
