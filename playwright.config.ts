@@ -12,7 +12,7 @@ export default defineConfig({
   reporter: [['html', { open: 'never' }]],
   use: {
     actionTimeout: 0,
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://invitation-three-phi.vercel.app',
     trace: 'on-first-retry',
   },
   projects: [
