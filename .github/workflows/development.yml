@@ -3,7 +3,7 @@ name: CI and Deploy to Vercel
 on:
   push:
     tags:
-      # ex) dev0.0.1
+      # ex) d241007-1
       - 'd[0-9]+-[0-9a-z]+'
 
 jobs:
@@ -18,23 +18,27 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        id: node-modules-cache
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-node-modules-${{hashFiles('**/package-lock.json')}}
-          restore-keys: |
-            ${{runner.os }}-node-modules-
+      # - name: Cache node_modules
+      #   uses: actions/cache@v3
+      #   id: node-modules-cache
+      #   with:
+      #     path: |
+      #       **/node_modules
+      #     key: ${{ runner.os }}-node-modules-${{hashFiles('**/package-lock.json')}}
+      #     restore-keys: |
+      #       ${{runner.os }}-node-modules-
 
       - name: Install dependencies
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: npm install
+        # if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Install Playwright browsers
-        run: npx playwright install
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json')}}
 
       - name: Run Playwright tests
         run: npm run test:e2e
