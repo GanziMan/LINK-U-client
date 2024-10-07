@@ -3,7 +3,7 @@ name: CI and Deploy to Vercel
 on:
   push:
     branches:
-      - main # 배포할 브랜치를 지정하세요.
+      - main
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # 프로젝트에 맞는 Node.js 버전을 지정하세요.
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
