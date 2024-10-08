@@ -7,7 +7,7 @@ import ClientProvider from './providers/queryClientProvider'
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: '모바일 청첩장',
-  description: '소중한 사람들을 초대합니다.',
+  description: '소중한 사람들을 초대합니다',
 }
 
 declare global {
