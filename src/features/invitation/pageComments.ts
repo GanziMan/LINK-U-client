@@ -28,6 +28,9 @@ export async function pageComments(
   const { cursor } = validated.data
 
   const data = await prisma.comments.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
     skip: cursor !== 0 ? 1 : 0,
     cursor: cursor ? { id: cursor } : undefined,
     take: 3,
