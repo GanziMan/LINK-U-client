@@ -1,5 +1,3 @@
-(app/sitemap.xml)
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://invitation-three-phi.vercel.app</loc>
