@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://invitation-three-phi.vercel.app/sitemap.xml
