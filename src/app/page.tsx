@@ -1,7 +1,6 @@
 // app/page.tsx
 import { Metadata } from 'next'
 import InvitationComponent from './components/invitation'
-import { NextSeo } from 'next-seo'
 
 export const metadata: Metadata = {
   title: {
@@ -36,7 +35,6 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <NextSeo noindex={false} />
       <InvitationComponent />
     </>
   )
