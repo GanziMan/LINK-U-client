@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 
   verification: {
     google: 'Zl29et0mZnPrc2Zjwn8RJ3vjPez_FzrfQmrle9GuAbM',
+    other: {
+      'naver-site-verification': '5576aaadf8cd2fc333025e72c60e487ccc16869f',
+    },
   },
   applicationName: 'Next.js',
   creator: 'dev Bum',
