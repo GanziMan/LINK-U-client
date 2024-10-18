@@ -8,6 +8,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: '모바일 청첩장',
   description: '소중한 사람들을 초대합니다',
+  // <meta name="google-site-verification" content="Zl29et0mZnPrc2Zjwn8RJ3vjPez_FzrfQmrle9GuAbM" />
+  verification: {
+    google: 'Zl29et0mZnPrc2Zjwn8RJ3vjPez_FzrfQmrle9GuAbM',
+  },
 }
 
 declare global {
