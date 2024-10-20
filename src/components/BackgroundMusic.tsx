@@ -1,37 +1,32 @@
-import { Box, styled } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Box, styled } from '@mui/material'
+import React, { useEffect, useRef, useState } from 'react'
 
 const BackgroundMusic: React.FC = () => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = audioRef.current
     if (audio) {
-      audio
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch((error) => {
-          console.error("Audio playback failed:", error);
-        });
+      audio.play().then(() => {
+        setIsPlaying(true)
+      })
     }
-  }, []);
+  }, [])
 
   const handlePlayMusic = () => {
-    const audio = audioRef.current;
+    const audio = audioRef.current
     if (audio) {
       audio
         .play()
         .then(() => {
-          setIsPlaying(true);
+          setIsPlaying(true)
         })
         .catch((error) => {
-          console.error("Audio playback failed:", error);
-        });
+          console.error('Audio playback failed:', error)
+        })
     }
-  };
+  }
 
   return (
     <PlayButton>
@@ -45,23 +40,23 @@ const BackgroundMusic: React.FC = () => {
         Your browser does not support the audio element.
       </audio>
     </PlayButton>
-  );
-};
+  )
+}
 
 const PlayButton = styled(Box)(() => {
   return {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "rgb(70, 65, 61)",
-    fontSize: "16px",
-    lineHeight: "26px",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'rgb(70, 65, 61)',
+    fontSize: '16px',
+    lineHeight: '26px',
     width: 230,
-    background: "#f1e0ce",
+    background: '#f1e0ce',
     height: 46,
-    borderRadius: "100px",
+    borderRadius: '100px',
     fontWeight: 600,
-  };
-});
+  }
+})
 
-export default BackgroundMusic;
+export default BackgroundMusic
