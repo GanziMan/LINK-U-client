@@ -55,8 +55,6 @@ test.describe('Wedding Invitation Page', () => {
     const nameInputValue = await page.inputValue('#name')
     const commentInputValue = await page.inputValue('#comment')
 
-    console.log('name:' + nameInputValue)
-    console.log('comment:' + commentInputValue)
     expect(nameInputValue).toBe('')
     expect(commentInputValue).toBe('')
   })
