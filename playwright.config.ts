@@ -13,6 +13,7 @@ export default defineConfig({
   use: {
     actionTimeout: 0,
     baseURL: 'https://invitation-three-phi.vercel.app',
+    // baseURL: 'https://invitation-three-phi.vercel.app',
     trace: 'on-first-retry',
   },
   projects: [
