@@ -18,4 +18,7 @@ export const createCommentSchema = z.object({
   comment: z.string(),
 })
 
+export type GetCountRequest = z.input<typeof getCountSchema>
+export type UpdateCountRequest = z.input<typeof updateCountSchema>
+export type PageCommentRequest = z.input<typeof pageCommentsSchema>
 export type CreateCommentRequest = z.input<typeof createCommentSchema>
