@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 import ClientProvider from './providers/queryClientProvider'
+import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     template: '%s - 모바일 커플 청첩장',
     default: 'Mobile Invitation',
   },
-
+  description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
   verification: {
     google: 'Zl29et0mZnPrc2Zjwn8RJ3vjPez_FzrfQmrle9GuAbM',
     other: {
@@ -22,15 +23,14 @@ export const metadata: Metadata = {
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
-    index: true,
+    index: false,
     follow: true,
     nocache: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: true,
     },
   },
-  description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
   keywords: ['청첩장', '모바일 청첩장', '연인 청첩장', '커플 청첩장'],
   openGraph: {
     title: '모바일 커플 청첩장',
@@ -53,7 +53,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <head>
+      <Head>
         {/* favicon */}
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
@@ -94,7 +94,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           strategy="afterInteractive"
           src={`https://developers.kakao.com/sdk/js/kakao.min.js`}
         />
-      </head>
+      </Head>
       <body className={inter.className}>
         <ClientProvider>{children}</ClientProvider>
       </body>
