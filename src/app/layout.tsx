@@ -53,7 +53,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         {/* favicon */}
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
@@ -94,7 +94,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           strategy="afterInteractive"
           src={`https://developers.kakao.com/sdk/js/kakao.min.js`}
         />
-      </Head>
+      </head>
       <body className={inter.className}>
         <ClientProvider>{children}</ClientProvider>
       </body>
