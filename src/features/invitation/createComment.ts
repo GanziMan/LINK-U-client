@@ -2,11 +2,9 @@
 
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
-import { createCommentSchema } from './schema'
+import { CreateCommentRequest, createCommentSchema } from './schema'
 
-export async function createComment(
-  request: z.input<typeof createCommentSchema>
-) {
+export async function createComment(request: CreateCommentRequest) {
   const validated = await createCommentSchema.safeParseAsync(request)
 
   const prisma = new PrismaClient()
@@ -18,11 +16,11 @@ export async function createComment(
     }
   }
 
-  const data = await prisma.comments.create({
+  const createResponse = await prisma.comments.create({
     data: validated.data,
   })
 
-  if (data)
+  if (createResponse)
     return {
       status: '200',
       message: '댓글을 생성하였습니다.',
