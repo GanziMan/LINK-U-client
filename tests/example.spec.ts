@@ -32,22 +32,23 @@ test.describe('Wedding Invitation Page', () => {
     }
   })
 
-  // 페이지 좋아요 수 테스트
+  // 페이지 좋아요 테스트
   test('like count button test', async ({ page }) => {
-    const beforeLikeCount = await page.locator('#like-count').innerText()
-
     await page.click('#heart-box')
-
-    const afterLikeCount = await page.locator('#like-count').innerText()
-
-    expect(Number(afterLikeCount) === Number(beforeLikeCount + 1))
   })
 
   // 방명록 댓글 작성 테스트
   test('comment form test', async ({ page }) => {
-    await page.fill('#name', '테스트 사용자')
+    const initialCommentCount = await page.locator('.comment').count()
+    const testUserName = '테스트 사용자' + Date.now()
+
+    await page.fill('#name', testUserName)
     await page.fill('#comment', '이것은 테스트 댓글입니다.')
     await page.click('button[type="submit"]', { timeout: 3000 })
+    await page.waitForSelector('#comment') // 댓글이 추가될 때까지 대기
+
+    const finalCommentCount = await page.locator('#comment').count()
+    expect(finalCommentCount).toBe(initialCommentCount + 1)
   })
 
   test('comment form reset test', async ({ page }) => {

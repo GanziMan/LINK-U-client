@@ -6,15 +6,13 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 import { z } from 'zod'
-import { pageCommentsSchema } from './schema'
+import { PageCommentRequest, pageCommentsSchema } from './schema'
 
 // 플러그인 로드
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
-export async function pageComments(
-  request: z.input<typeof pageCommentsSchema>
-) {
+export async function pageComments(request: PageCommentRequest) {
   const prisma = new PrismaClient()
 
   const validated = await pageCommentsSchema.safeParseAsync(request)

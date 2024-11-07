@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
-    index: true,
+    index: false,
     follow: true,
     nocache: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: true,
     },
   },
@@ -36,9 +36,5 @@ export const metadata: Metadata = {
   },
 }
 export default function Page() {
-  return (
-    <>
-      <InvitationComponent />
-    </>
-  )
+  return <InvitationComponent />
 }

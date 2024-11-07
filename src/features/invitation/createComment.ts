@@ -1,32 +1,28 @@
-"use server";
+'use server'
 
-import { z } from "zod";
-import { PrismaClient } from "@prisma/client";
-import { createCommentSchema } from "./schema";
+import { z } from 'zod'
+import { PrismaClient } from '@prisma/client'
+import { CreateCommentRequest, createCommentSchema } from './schema'
 
-export type CreateCommentResponse = Awaited<ReturnType<typeof createComment>>;
+export async function createComment(request: CreateCommentRequest) {
+  const validated = await createCommentSchema.safeParseAsync(request)
 
-export async function createComment(
-  request: z.input<typeof createCommentSchema>
-) {
-  const validated = await createCommentSchema.safeParseAsync(request);
-
-  const prisma = new PrismaClient();
+  const prisma = new PrismaClient()
 
   if (!validated.success) {
     return {
-      code: "VALIDATION ERROR" as const,
+      code: 'VALIDATION ERROR' as const,
       message: validated.error.issues[0].message,
-    };
+    }
   }
 
-  const data = await prisma.comments.create({
+  const createResponse = await prisma.comments.create({
     data: validated.data,
-  });
+  })
 
-  if (data)
+  if (createResponse)
     return {
-      status: "200",
-      message: "댓글을 생성하였습니다.",
-    };
+      status: '200',
+      message: '댓글을 생성하였습니다.',
+    }
 }

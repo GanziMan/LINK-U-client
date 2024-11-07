@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: '%s - 모바일 커플 청첩장',
     default: 'Mobile Invitation',
   },
-
+  description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
   verification: {
     google: 'Zl29et0mZnPrc2Zjwn8RJ3vjPez_FzrfQmrle9GuAbM',
     other: {
@@ -22,15 +22,14 @@ export const metadata: Metadata = {
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
-    index: true,
+    index: false,
     follow: true,
     nocache: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: true,
     },
   },
-  description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
   keywords: ['청첩장', '모바일 청첩장', '연인 청첩장', '커플 청첩장'],
   openGraph: {
     title: '모바일 커플 청첩장',
