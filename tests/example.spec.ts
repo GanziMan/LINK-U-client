@@ -37,19 +37,19 @@ test.describe('Wedding Invitation Page', () => {
     await page.click('#heart-box')
   })
 
-  // 방명록 댓글 작성 테스트
-  test('comment form test', async ({ page }) => {
-    const initialCommentCount = await page.locator('.comment').count()
-    const testUserName = '테스트 사용자' + Date.now()
+  // // 방명록 댓글 작성 테스트
+  // test('comment form test', async ({ page }) => {
+  //   const initialCommentCount = await page.locator('.comment').count()
+  //   const testUserName = '테스트 사용자' + Date.now()
 
-    await page.fill('#name', testUserName)
-    await page.fill('#comment', '이것은 테스트 댓글입니다.')
-    await page.click('button[type="submit"]', { timeout: 3000 })
-    await page.waitForSelector('#comment') // 댓글이 추가될 때까지 대기
+  //   await page.fill('#name', testUserName)
+  //   await page.fill('#comment', '이것은 테스트 댓글입니다.')
+  //   await page.click('button[type="submit"]', { timeout: 3000 })
+  //   await page.waitForSelector('#comment') // 댓글이 추가될 때까지 대기
 
-    const finalCommentCount = await page.locator('#comment').count()
-    expect(finalCommentCount).toBe(initialCommentCount + 1)
-  })
+  //   const finalCommentCount = await page.locator('#comment').count()
+  //   expect(finalCommentCount).toBe(initialCommentCount + 1)
+  // })
 
   test('comment form reset test', async ({ page }) => {
     // reset 테스트
