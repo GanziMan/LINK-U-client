@@ -33,6 +33,7 @@ export default function InvitationAccountForm() {
       {ACCORDION_DATA.map((data) => {
         return (
           <CommonAccordion
+            key={data.genderImageUrl}
             AccountInfo={data.AccountInfo}
             backgroundColor={data.backgroundColor}
             gender={data.gender}
