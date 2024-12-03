@@ -30,10 +30,10 @@ export default function InvitationAccountForm() {
         />
         <AccountBoxText>마음 전하실 곳</AccountBoxText>
       </AccountBox>
-      {ACCORDION_DATA.map((data) => {
+      {ACCORDION_DATA.map((data, index) => {
         return (
           <CommonAccordion
-            key={data.genderImageUrl}
+            key={index}
             AccountInfo={data.AccountInfo}
             backgroundColor={data.backgroundColor}
             gender={data.gender}
