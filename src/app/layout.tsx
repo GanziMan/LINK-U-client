@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 import ClientProvider from './providers/queryClientProvider'
+import { RootLayoutProps } from './schema/mainPageSchea'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,10 +44,6 @@ declare global {
   interface Window {
     Kakao: any
   }
-}
-
-interface RootLayoutProps {
-  children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {

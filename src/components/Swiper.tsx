@@ -1,43 +1,39 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
-import SwiperCore from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Box, styled } from "@mui/material";
-import Image from "next/image";
-import { color } from "framer-motion";
-import { useState } from "react";
-
-interface SlideDataType {
-  imageUrl: string;
-}
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Scrollbar } from 'swiper/modules'
+import SwiperCore from 'swiper'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Box, styled } from '@mui/material'
+import Image from 'next/image'
+import { useState } from 'react'
+import { SlideDataType } from '@/app/schema/mainPageSchea'
 
 export default function CommonSwiper() {
-  SwiperCore.use([Navigation, Scrollbar]);
+  SwiperCore.use([Navigation, Scrollbar])
 
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
 
   const SlideData: SlideDataType[] = [
     {
-      imageUrl: "/images/wedding/wedding-1.jpeg",
+      imageUrl: '/images/wedding/wedding-1.jpeg',
     },
     {
-      imageUrl: "/images/wedding/wedding-2.jpeg",
+      imageUrl: '/images/wedding/wedding-2.jpeg',
     },
     {
-      imageUrl: "/images/wedding/wedding-3.jpeg",
+      imageUrl: '/images/wedding/wedding-3.jpeg',
     },
-  ];
+  ]
 
   const handleSlideChange = (swiper: SwiperCore) => {
-    setCurrentIndex(swiper.realIndex);
-  };
+    setCurrentIndex(swiper.realIndex)
+  }
   return (
     <SwiperWrapper>
       <Box
         sx={{
-          color: "#775F4C",
+          color: '#775F4C',
         }}
       >
         Moment of love
@@ -52,9 +48,9 @@ export default function CommonSwiper() {
           <SwiperSlide key={index}>
             <Box
               sx={{
-                position: "relative",
-                width: "340px",
-                height: "500px", // 원하는 높이로 설정
+                position: 'relative',
+                width: '340px',
+                height: '500px', // 원하는 높이로 설정
               }}
             >
               <Image
@@ -70,44 +66,44 @@ export default function CommonSwiper() {
 
       <Box
         sx={{
-          color: "#775F4C",
+          color: '#775F4C',
         }}
       >
-        {currentIndex + 1 + "/" + SlideData.length}
+        {currentIndex + 1 + '/' + SlideData.length}
       </Box>
     </SwiperWrapper>
-  );
+  )
 }
 
 const SwiperWrapper = styled(Box)(() => {
   return {
     width: 360,
     height: 620,
-    display: "flex",
-    color: "black",
-    flexDirection: "column",
-    justifyContent: "center",
-    background: "#f1e0ce",
-    alignItems: "center",
-    gap: "10px",
-    position: "relative",
-  };
-});
+    display: 'flex',
+    color: 'black',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    background: '#f1e0ce',
+    alignItems: 'center',
+    gap: '10px',
+    position: 'relative',
+  }
+})
 
 const SwiperST = styled(Swiper)(() => {
   return {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    "& .swiper-wrapper": {
-      boxSizing: "border-box",
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    '& .swiper-wrapper': {
+      boxSizing: 'border-box',
     },
-    "& .swiper-slide": {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+    '& .swiper-slide': {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
-    "& .swiper-button-prev, & .swiper-button-next": {
+    '& .swiper-button-prev, & .swiper-button-next': {
       // position: "absolute", // 기본 위치를 상대적으로 변경
       // bottom: 0,
       // color: "black",
@@ -116,12 +112,12 @@ const SwiperST = styled(Swiper)(() => {
       // "&:after": {
       //   fontSize: "20px", // 화살표 아이콘 크기 조정
       // },
-      display: "none",
+      display: 'none',
     },
-  };
-});
+  }
+})
 const ImgST = styled(Image)(() => {
   return {
-    cursor: "pointer",
-  };
-});
+    cursor: 'pointer',
+  }
+})

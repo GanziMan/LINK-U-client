@@ -4,12 +4,7 @@ import PaginationComponent from '@/components/Pagination'
 import LinesEllipsis from 'react-lines-ellipsis'
 import { InfiniteData } from '@tanstack/react-query'
 import { Fragment } from 'react'
-
-interface commentDataType {
-  name: string
-  comment: string
-  date: string
-}
+import { commentDataType } from '../schema/mainPageSchea'
 
 export default function CommentForm({
   isFetching,

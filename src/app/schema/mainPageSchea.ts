@@ -1,3 +1,9 @@
+import { ReactNode } from 'react'
+
+export interface RootLayoutProps {
+  children: ReactNode
+}
+
 export interface CommentFormType {
   name: string
   comment: string
@@ -14,6 +20,23 @@ export interface CommentType {
   comment: string
   date: string
   nextCursor: string
+}
+export interface ClientProviderProps {
+  children: ReactNode
+}
+export interface SlideDataType {
+  imageUrl: string
+}
+
+export interface LinkType {
+  mobileWebUrl: string
+  webUrl: string
+}
+
+export interface commentDataType {
+  name: string
+  comment: string
+  date: string
 }
 
 export const GroomAccountInfo: AccountInfoType[] = [
