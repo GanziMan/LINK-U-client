@@ -1,9 +1,8 @@
-import { CircularProgress } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { CommentContainer, VisitorBox } from '../styles'
 import PaginationComponent from '@/components/Pagination'
 import LinesEllipsis from 'react-lines-ellipsis'
 import { InfiniteData } from '@tanstack/react-query'
-import { Fragment } from 'react'
 import { commentDataType } from '../schema/mainPageSchea'
 
 export default function CommentForm({
@@ -45,7 +44,13 @@ export default function CommentForm({
   handlePageChange: (_event: React.ChangeEvent<unknown>, page: number) => void
 }) {
   return (
-    <Fragment>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      gap="10px"
+      width={'100%'}
+      alignItems={'center'}
+    >
       <VisitorBox>방명록</VisitorBox>
       <CommentContainer>
         {isFetching && (
@@ -83,6 +88,6 @@ export default function CommentForm({
           onChange={handlePageChange}
         />
       </CommentContainer>
-    </Fragment>
+    </Box>
   )
 }
