@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { SlideDataType } from '@/app/schema/mainPageSchea'
 
-export default function CommonSwiper() {
+export default function GallerySwiper() {
   SwiperCore.use([Navigation, Scrollbar])
 
   const [currentIndex, setCurrentIndex] = useState<number>(0)
@@ -31,12 +31,8 @@ export default function CommonSwiper() {
   }
   return (
     <SwiperWrapper>
-      <Box
-        sx={{
-          color: '#775F4C',
-        }}
-      >
-        Moment of love
+      <Box color={'black'} fontWeight={'bold'}>
+        갤러리
       </Box>
       <SwiperST
         loop
@@ -83,7 +79,7 @@ const SwiperWrapper = styled(Box)(() => {
     color: 'black',
     flexDirection: 'column',
     justifyContent: 'center',
-    background: '#f1e0ce',
+    background: '#f6fbff',
     alignItems: 'center',
     gap: '10px',
     position: 'relative',
@@ -114,10 +110,5 @@ const SwiperST = styled(Swiper)(() => {
       // },
       display: 'none',
     },
-  }
-})
-const ImgST = styled(Image)(() => {
-  return {
-    cursor: 'pointer',
   }
 })

@@ -1,6 +1,5 @@
-import CommonSwiper from '@/components/Swiper'
+import GallerySwiper from '@/components/GallerySwiper'
 import { Box } from '@mui/material'
-import { Fragment } from 'react'
 
 export default function AlbumForm() {
   return (
@@ -10,7 +9,7 @@ export default function AlbumForm() {
       gap={'5px'}
       alignItems={'center'}
     >
-      <CommonSwiper />
+      <GallerySwiper />
     </Box>
   )
 }
