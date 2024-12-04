@@ -9,7 +9,7 @@ import {
   CommentWriteTextBox,
 } from '../styles'
 import { CommentFormType } from '../schema/mainPageSchea'
-import { createCommentSchema } from '@/features/invitation/schema'
+import { createCommentSchema } from '@/actions/invitation/schema'
 
 const initialValues: CommentFormType = {
   name: '',

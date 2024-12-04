@@ -5,8 +5,8 @@ import { Box, styled } from '@mui/material'
 import JSConfetti from 'js-confetti'
 import Image from 'next/image'
 import { SnackbarProvider, enqueueSnackbar } from 'notistack'
-import { getCount } from '@/features/invitation/getCount'
-import { updateCount } from '@/features/invitation/updateCount'
+import { getCount } from '@/actions/invitation/getCount'
+import { updateCount } from '@/actions/invitation/updateCount'
 
 import {
   useInfiniteQuery,
@@ -15,7 +15,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 
-import { pageComments } from '@/features/invitation/pageComments'
+import { pageComments } from '@/actions/invitation/pageComments'
 import {
   DivideLine,
   InvitaionContainer,
@@ -28,7 +28,7 @@ import {
   WeddingImageText,
   WeddingImageWrapper,
 } from '../../styles'
-import { createComment } from '@/features/invitation/createComment'
+import { createComment } from '@/actions/invitation/createComment'
 import { useEffect, useState } from 'react'
 import KakaoMap from '@/components/KakaoMap'
 import FormikForm from '../FormikForm'
