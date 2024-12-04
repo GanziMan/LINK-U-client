@@ -42,34 +42,34 @@ export interface commentDataType {
 export const GroomAccountInfo: AccountInfoType[] = [
   {
     position: '신랑',
-    name: ' ⃝ ⃝ ⃝',
+    name: 'O O O',
     accountInfo: '카카오뱅크 0000-11-000000',
   },
   {
     position: '아버지',
-    name: ' ⃝ ⃝ ⃝',
+    name: 'O O O',
     accountInfo: '카카오뱅크 0000-11-000000',
   },
   {
     position: '어머니',
-    name: ' ⃝ ⃝ ⃝',
+    name: 'O O O',
     accountInfo: '카카오뱅크 0000-11-000000',
   },
 ]
 export const BrideAccountInfo: AccountInfoType[] = [
   {
     position: '신부',
-    name: ' ⃝ ⃝ ⃝',
+    name: 'O O O',
     accountInfo: '카카오뱅크 0000-11-000000',
   },
   {
     position: '아버지',
-    name: ' ⃝ ⃝ ⃝',
+    name: 'O O O',
     accountInfo: '카카오뱅크 0000-11-000000',
   },
   {
     position: '어머니',
-    name: ' ⃝ ⃝ ⃝ ',
+    name: 'O O O',
     accountInfo: '카카오뱅크 0000-11-000000',
   },
 ]
