@@ -5,7 +5,7 @@ export const InvitaionContainer = styled(Box)(() => {
   return {
     width: '100%',
     color: '#594739',
-    background: '#f1e0ce',
+    background: '#333',
     display: 'flex',
     justifyContent: 'center',
   }
@@ -35,7 +35,6 @@ export const WeddingImageWrapper = styled(Box)(() => {
 export const WeddingImageText = styled(Box)(() => {
   return {
     fontSize: '14px',
-    fontFamily: 'judson',
   }
 })
 
@@ -213,7 +212,6 @@ export const CommentNameBox = styled(Box)(() => {
   return {
     fontSize: '12px',
     lineHeight: '20px',
-    fontFamily: 'judson',
     fontWeight: 700,
   }
 })
@@ -222,7 +220,6 @@ export const CommentContentBox = styled(Box)(() => {
   return {
     fontSize: '14px',
     lineHeight: '22px',
-    fontFamily: 'judson',
   }
 })
 
@@ -230,7 +227,6 @@ export const CommentDateBox = styled(Box)(() => {
   return {
     fontSize: '11px',
     lineHeight: '16px',
-    fontFamily: 'judson',
     marginLeft: 'auto',
   }
 })
