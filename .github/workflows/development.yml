@@ -52,4 +52,4 @@ jobs:
       - name: Promote to Production
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: npx vercel promote --token $VERCEL_TOKEN
+        run: npx vercel promote --token $VERCEL_TOKEN --yes
