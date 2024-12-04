@@ -5,7 +5,7 @@ import InvitationComponent from './components/invitation'
 export const metadata: Metadata = {
   title: {
     template: '%s - 모바일 커플 청첩장',
-    default: 'Mobile Invitation',
+    default: 'LINK-U',
   },
 
   verification: {

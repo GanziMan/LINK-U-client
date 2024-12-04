@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: {
     template: '%s - 모바일 커플 청첩장',
-    default: 'Mobile Invitation',
+    default: 'LINK-U',
   },
   description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
   verification: {
