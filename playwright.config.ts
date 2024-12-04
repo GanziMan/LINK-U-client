@@ -12,8 +12,7 @@ export default defineConfig({
   reporter: [['html', { open: 'never' }]],
   use: {
     actionTimeout: 0,
-    baseURL: 'https://invitation-bumsukims-projects.vercel.app',
-    // baseURL: 'https://invitation-three-phi.vercel.app',
+    baseURL: 'https://link-u.shop/',
     trace: 'on-first-retry',
   },
   projects: [
