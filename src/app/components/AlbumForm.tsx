@@ -4,16 +4,13 @@ import { Fragment } from 'react'
 
 export default function AlbumForm() {
   return (
-    <Fragment>
-      <Box
-        color={'#e5ac53'}
-        fontFamily={'WONBatang'}
-        fontSize={'19px'}
-        lineHeight={'22px'}
-      >
-        Album
-      </Box>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      gap={'5px'}
+      alignItems={'center'}
+    >
       <CommonSwiper />
-    </Fragment>
+    </Box>
   )
 }
