@@ -16,7 +16,7 @@ const initialValues: CommentFormType = {
   comment: '',
 }
 
-export default function FormikForm({
+export default function CommentsCreateForm({
   commentRegist,
 }: {
   commentRegist: (value: CommentFormType) => void

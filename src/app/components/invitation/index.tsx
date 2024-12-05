@@ -31,7 +31,7 @@ import {
 import { createComment } from '@/actions/invitation/createComment'
 import { useEffect, useState } from 'react'
 import KakaoMap from '@/components/KakaoMap'
-import FormikForm from '../FormikForm'
+import FormikForm from '../CommentsCreateForm'
 import CommentForm from '../CommentForm'
 import LikeBox from '../ShareBox'
 import AlbumForm from '../AlbumForm'
