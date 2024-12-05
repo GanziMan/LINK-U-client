@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - 'd[0-9]+-[0-9a-z]+'
-    branches:
-      - main
-      - production
 
 jobs:
   test:
