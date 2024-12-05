@@ -2,7 +2,7 @@
 
 # 🌐 Links
 
-> **Service** : [모바일 청첩장](https://invitation-bumsukims-projects.vercel.app) <br>
+> **Service** : [모바일 청첩장](https://link-u.shop) <br>
 
 # ⚙️ How to Start
 
