@@ -163,11 +163,14 @@ export default function InvitationComponent() {
             분들을 초대합니다.
           </InviteText>
           2025년 02월 15일(토)
-          <BoxImage
+          <Image
             src={'/images/wedding/wedding-3.jpeg'}
             alt=""
             width={328}
             height={328}
+            style={{
+              width: '100%',
+            }}
           />
           <Image
             src={'/images/image/greeting.jpg'}
@@ -214,9 +217,3 @@ export default function InvitationComponent() {
     </SnackbarProvider>
   )
 }
-
-const BoxImage = styled(Image)(() => {
-  return {
-    width: '100%',
-  }
-})

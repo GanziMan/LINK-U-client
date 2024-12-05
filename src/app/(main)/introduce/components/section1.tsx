@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 import {
   CommonContainer,
   MainContentBox,
   MainContentButton,
   MainContentText,
-} from "../styles";
-import { Box } from "@mui/material";
+} from '../styles'
+import { Box } from '@mui/material'
 
 export default function Section1({
   scrollToSection,
 }: {
-  scrollToSection: () => void;
+  scrollToSection: () => void
 }) {
-  const words = ["안녕하세요", "청첩장 카드 플랫폼", "PisCard", "입니다."];
+  const words = ['안녕하세요', '청첩장 카드 플랫폼', 'LINK-U', '입니다.']
 
   const sequence = {
     hidden: { opacity: 0 },
@@ -24,7 +24,7 @@ export default function Section1({
         delay: i * 0.5,
       },
     }),
-  };
+  }
 
   const buttonVariant = {
     hidden: { opacity: 0, y: 20 },
@@ -35,7 +35,7 @@ export default function Section1({
         delay: words.length * 0.5,
       },
     },
-  };
+  }
 
   return (
     <CommonContainer>
@@ -43,9 +43,9 @@ export default function Section1({
         <MainContentText>
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
             }}
           >
             {words.map((word, index) => (
@@ -56,8 +56,8 @@ export default function Section1({
                 animate="visible"
                 variants={sequence}
                 style={{
-                  marginRight: "8px",
-                  color: word === "PisCard" ? "#f1e0ce" : undefined,
+                  marginRight: '8px',
+                  color: word === 'PisCard' ? '#f1e0ce' : undefined,
                 }}
               >
                 {word}
@@ -71,7 +71,7 @@ export default function Section1({
             whileHover={{
               scale: 1.05,
             }}
-            transition={{ type: "spring", stiffness: 200, damping: 5 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 5 }}
             onClick={scrollToSection}
           >
             <MainContentButton>시작하기</MainContentButton>
@@ -79,5 +79,5 @@ export default function Section1({
         </motion.div>
       </MainContentBox>
     </CommonContainer>
-  );
+  )
 }

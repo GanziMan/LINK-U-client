@@ -26,12 +26,14 @@ export default function FormikForm({
       <Formik
         initialValues={initialValues}
         validationSchema={toFormikValidationSchema(createCommentSchema)}
+        enableReinitialize={true}
+        validateOnBlur={true}
         onSubmit={(value, { resetForm }) => {
           commentRegist(value)
           resetForm()
         }}
       >
-        {({ getFieldProps, values, dirty }) => {
+        {({ getFieldProps, isValid, isSubmitting, dirty }) => {
           return (
             <Form>
               <CommentWriteBox>
@@ -61,14 +63,14 @@ export default function FormikForm({
               </CommentWriteBox>
               <button
                 type="submit"
-                disabled={dirty}
+                disabled={!isValid || !dirty || isSubmitting}
                 style={{
                   borderRadius: '4px',
                   width: 100,
                   height: 40,
                   float: 'right',
-                  background: dirty ? '#f1e0ce' : 'lightgray',
-                  color: 'white',
+                  background: !isValid || !dirty ? 'lightgray' : '#f6fbff',
+                  color: !isValid || !dirty ? 'white' : '#594739',
                   marginTop: '30px',
                 }}
               >
