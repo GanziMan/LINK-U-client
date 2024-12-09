@@ -7,16 +7,14 @@ test.describe('메인 페이지 접근', () => {
 
     const likeCountSelector = '#like-count'
     const beforeLikeCount = await page.textContent(likeCountSelector)
-
-    console.log(beforeLikeCount || 0)
+    console.log(beforeLikeCount)
     // When: 사용자가 좋아요 버튼 클릭
-    // await page.click('#heart-box')
+    await page.click('#heart-box')
 
     // Then: 좋아요 수가 증가했는지 확인
-    // const afterLikeCount = await page.textContent(likeCountSelector)
-
-    //
-    // expect(afterLikeCountNumber).toBe(beforeLikeCountNumber + 1)
+    const afterLikeCount = await page.textContent(likeCountSelector)
+    console.log(afterLikeCount)
+    // expect(Number(afterLikeCount)).toBe(Number(beforeLikeCount) + 1)
   })
 
   //   test('방명록 작성 테스트', async ({ page }) => {
