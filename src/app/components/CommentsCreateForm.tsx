@@ -45,6 +45,7 @@ export default function CommentsCreateForm({
                       style: {
                         width: 100,
                         height: 10,
+                        fontFamily: 'binggrae',
                       },
                     }}
                     {...getFieldProps('name')}
@@ -66,6 +67,7 @@ export default function CommentsCreateForm({
                 disabled={!isValid || !dirty || isSubmitting}
                 style={{
                   borderRadius: '4px',
+                  border: '1px solid #c8cae6',
                   width: 100,
                   height: 40,
                   float: 'right',
