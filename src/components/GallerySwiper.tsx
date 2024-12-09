@@ -53,7 +53,9 @@ export default function GallerySwiper() {
                 src={slide.imageUrl}
                 alt=""
                 layout="fill"
-                objectFit="cover" // 전체 이미지를 보기 위해서는 "contain"으로 변경 가능
+                style={{
+                  objectFit: 'cover',
+                }}
               />
             </Box>
           </SwiperSlide>
