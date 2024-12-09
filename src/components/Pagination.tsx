@@ -30,10 +30,6 @@ export default function PaginationComponent({
         size={'small'}
         variant="outlined"
         sx={{
-          '& .Mui-selected': {
-            background: '#f6fbff',
-          },
-
           '& .MuiPaginationItem-previousNext': {
             background: 'white',
           },
