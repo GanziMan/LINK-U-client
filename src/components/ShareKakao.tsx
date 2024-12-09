@@ -22,8 +22,8 @@ export default function ShareKakao({
     window.Kakao?.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: '모바일 청첩장',
-        description: '호영이와 도현이의 결혼식을 초대합니다.',
+        title: 'LINK-U',
+        description: '결혼식을 초대합니다.',
         imageUrl:
           'https://ilotteshopping.com/myweddingstyle/image/main/img3.png',
         link: {
