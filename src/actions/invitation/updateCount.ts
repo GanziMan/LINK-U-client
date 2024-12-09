@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
 import { UpdateCountRequest, updateCountSchema } from './schema'
+import { revalidatePath } from 'next/cache'
 
 export type UpdateCountResponse = Awaited<ReturnType<typeof updateCount>>
 
@@ -27,6 +28,7 @@ export async function updateCount(request: UpdateCountRequest) {
     },
   })
 
+  revalidatePath('/')
   if (data)
     return {
       status: '200',
