@@ -1,5 +1,4 @@
 import { Box, TextField, TextareaAutosize, styled } from '@mui/material'
-import { motion } from 'framer-motion'
 
 export const InvitaionContainer = styled(Box)(() => {
   return {
@@ -253,20 +252,15 @@ export const CommentWriteNameBox = styled(Box)(() => {
 export const CommentWriteTextBox = styled(TextField)(() => {
   return {
     '& .MuiOutlinedInput-root fieldset': {
-      border: '1px solid #f1e0ce',
+      border: '0px',
     },
-
-    // "&.MuiInputLabel-root": {
-    //   top: "50%",
-    //   transform: "translateY(-50%)",
-    // },
-    // ".MuiInputBase-root": {
-    //   alignItems: "center",
-    // },
-    // ".MuiInputLabel-shrink": {
-    //   top: 0,
-    //   transform: "translate(0, -100%)",
-    // },
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'transparent', // focus 시 outline 제거
+      },
+    },
+    border: '1px solid #c8cae6',
+    borderRadius: '4px',
   }
 })
 
@@ -283,11 +277,16 @@ export const CommentWriteContentBox = styled(Box)(() => {
 export const CommentWriteTextAreaBox = styled(TextareaAutosize)(() => {
   return {
     width: '100%',
-    border: '1px solid #f1e0ce',
+    border: '1px solid #c8cae6',
     borderRadius: '4px',
     padding: '16.5px 14px',
+    '&:focus': {
+      outline: 'none',
+    },
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'transparent', // focus 시 outline 제거
+      },
+    },
   }
 })
-
-// motion으로 감싸는 컴포넌트를 생성합니다.
-export const MotionBox = motion(Box)
