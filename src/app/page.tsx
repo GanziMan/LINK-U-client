@@ -15,7 +15,7 @@ export const metadata: Metadata = {
       'naver-site-verification': '5576aaadf8cd2fc333025e72c60e487ccc16869f',
     },
   },
-  applicationName: 'Next.js',
+  applicationName: 'LINK-U',
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   },
 }
 export default async function Page() {
-  const likeCount2 = await getCount({ id: '1' }).then(
+  const likeCount = await getCount({ id: '1' }).then(
     (res) => res?.data?.like_count
   )
 
-  return <InvitationComponent likeCount={likeCount2 || 0} />
+  return <InvitationComponent likeCount={likeCount || 0} />
 }
