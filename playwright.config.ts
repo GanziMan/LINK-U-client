@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
   testDir: './tests',
@@ -6,35 +6,26 @@ export default defineConfig({
   expect: {
     timeout: 5000,
   },
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: [['html', { open: 'never' }]],
+
   use: {
-    actionTimeout: 0,
-    baseURL: 'https://link-u.shop/',
-    trace: 'on-first-retry',
+    baseURL: 'http://localhost:3000',
+    headless: true, // headless 모드로 실행
+    screenshot: 'only-on-failure', // 실패 시 스크린샷 저장
+    video: 'retain-on-failure', // 실패 시 비디오 저장
+    trace: 'on-first-retry', // 첫 번째 실패 시 trace 저장
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { browserName: 'chromium' },
     },
     {
       name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-        launchOptions: {
-          firefoxUserPrefs: {
-            'media.autoplay.default': 0, // Allow all autoplay
-            'media.autoplay.enabled.user-gestures-needed': false, // Disable user gesture requirement
-          },
-        },
-      },
+      use: { browserName: 'firefox' },
     },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'webkit',
+      use: { browserName: 'webkit' },
+    },
   ],
 })
