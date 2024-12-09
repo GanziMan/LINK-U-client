@@ -40,7 +40,7 @@ export default function CommentsCreateForm({
                 <CommentWriteNameBox>
                   <CommentWriteTextBox
                     placeholder="성함"
-                    id="name"
+                    id="comment-name"
                     inputProps={{
                       style: {
                         width: 100,
@@ -53,7 +53,7 @@ export default function CommentsCreateForm({
                 <CommentWriteContentBox>
                   <CommentWriteTextAreaBox
                     maxLength={98}
-                    id="comment"
+                    id="comment-content"
                     minRows={3}
                     maxRows={3}
                     placeholder="하고 싶은 말을 전하세요."
