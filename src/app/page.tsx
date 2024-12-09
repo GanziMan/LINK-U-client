@@ -1,6 +1,7 @@
 // app/page.tsx
 import { Metadata } from 'next'
 import InvitationComponent from './components/invitation'
+import { getCount } from '@/actions/invitation/getCount'
 
 export const metadata: Metadata = {
   title: {
@@ -35,6 +36,10 @@ export const metadata: Metadata = {
     type: 'website',
   },
 }
-export default function Page() {
-  return <InvitationComponent />
+export default async function Page() {
+  const likeCount2 = await getCount({ id: '1' }).then(
+    (res) => res?.data?.like_count
+  )
+
+  return <InvitationComponent likeCount={likeCount2 || 0} />
 }
