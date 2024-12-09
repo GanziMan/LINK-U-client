@@ -47,6 +47,19 @@ export default function InvitationComponent({
     setJsConfetti(new JSConfetti())
   }, [])
 
+  const likeCountUp = async () => {
+    await updateCount({ id: '1' }).then(() => {
+      jsConfetti
+        ?.addConfetti({
+          confettiColors: ['#CAB0FF'],
+          confettiNumber: 500,
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    })
+  }
+
   const [currentPage, setCurrentPage] = useState<number>(1)
 
   const {
@@ -67,23 +80,6 @@ export default function InvitationComponent({
   })
 
   const comments = commentPage?.pages[currentPage - 1]?.data?.comments || []
-
-  const { mutate: likeCountMutation } = useMutation({
-    mutationFn: async () => await updateCount({ id: '1' }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['like-count'],
-      })
-
-      jsConfetti?.addConfetti({
-        confettiColors: ['#CAB0FF'],
-        confettiNumber: 500,
-      })
-    },
-    onError: () => {
-      enqueueSnackbar('좋아요 업데이트 오류', { variant: 'error' })
-    },
-  })
 
   const handlePageChange = async (
     _event: React.ChangeEvent<unknown>,
@@ -197,10 +193,7 @@ export default function InvitationComponent({
           <LocationNameBox> 경기도 파주시 파주웨딩홀</LocationNameBox>
           <LocationTextBox>(파주시 22로 11111가길 파주웨딩홀)</LocationTextBox>
           <KakaoMap />
-          <LikeBox
-            likeCountMutation={likeCountMutation}
-            likeCount={likeCount!}
-          />
+          <LikeBox likeCountMutation={likeCountUp} likeCount={likeCount!} />
           <CommentForm
             isFetching={isFetching}
             comments={comments}
