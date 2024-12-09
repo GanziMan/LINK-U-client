@@ -1,17 +1,15 @@
 'use client'
 
 import BackgroundMusic from '@/components/BackgroundMusic'
-import { Box, styled } from '@mui/material'
+import { Box } from '@mui/material'
 import JSConfetti from 'js-confetti'
 import Image from 'next/image'
 import { SnackbarProvider, enqueueSnackbar } from 'notistack'
-import { getCount } from '@/actions/invitation/getCount'
 import { updateCount } from '@/actions/invitation/updateCount'
 
 import {
   useInfiniteQuery,
   useMutation,
-  useQuery,
   useQueryClient,
 } from '@tanstack/react-query'
 
@@ -37,7 +35,11 @@ import LikeBox from '../ShareBox'
 import AlbumForm from '../AlbumForm'
 import InvitationAccountForm from '../InvitationAccordionForm'
 
-export default function InvitationComponent() {
+export default function InvitationComponent({
+  likeCount,
+}: {
+  likeCount: number
+}) {
   const queryClient = useQueryClient()
 
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null)
@@ -46,14 +48,6 @@ export default function InvitationComponent() {
   }, [])
 
   const [currentPage, setCurrentPage] = useState<number>(1)
-
-  const { data: likeCount } = useQuery({
-    queryKey: ['like-count'],
-    queryFn: async () => {
-      const response = await getCount({ id: '1' })
-      return response?.data?.like_count
-    },
-  })
 
   const {
     data: commentPage,
@@ -131,10 +125,13 @@ export default function InvitationComponent() {
         queryKey: ['comment-page'],
       })
 
-      enqueueSnackbar('댓글이 등록되었습니다.', { variant: 'success' })
+      enqueueSnackbar('방명록이 작성되었습니다.', {
+        variant: 'success',
+        className: 'toastSuccessAlert',
+      })
     },
-    onError: () => {
-      enqueueSnackbar('좋아요 업데이트 오류', { variant: 'error' })
+    onError: (error) => {
+      console.error(error.message)
     },
   })
 
