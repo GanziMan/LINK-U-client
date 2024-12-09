@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       'naver-site-verification': '5576aaadf8cd2fc333025e72c60e487ccc16869f',
     },
   },
-  applicationName: 'Next.js',
+  applicationName: 'LINK-U',
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
