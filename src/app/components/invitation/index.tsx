@@ -34,6 +34,7 @@ import CommentForm from '../CommentForm'
 import LikeBox from '../ShareBox'
 import AlbumForm from '../AlbumForm'
 import InvitationAccountForm from '../InvitationAccordionForm'
+import { InfiniteQueryResult, pageType } from '@/app/schema/mainPageSchea'
 
 export default function InvitationComponent({
   likeCount,
@@ -116,11 +117,32 @@ export default function InvitationComponent({
 
   const { mutate: commentMutation } = useMutation({
     mutationFn: createComment,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['comment-page'],
-      })
+    onSuccess: (newComment) => {
+      // queryClient.invalidateQueries({
+      //   queryKey: ['comment-page'],
+      // })
 
+      queryClient.setQueryData(
+        ['comment-page'],
+        (oldData: InfiniteQueryResult) => {
+          if (!oldData) return null
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page: pageType, index: number) => {
+              if (index === 0 && newComment.status === '200') {
+                return {
+                  ...page,
+                  data: {
+                    ...page.data,
+                    comments: [newComment.data, ...page.data.comments],
+                  },
+                }
+              }
+              return page
+            }),
+          }
+        }
+      )
       enqueueSnackbar('방명록이 작성되었습니다.', {
         variant: 'success',
         className: 'toastSuccessAlert',
