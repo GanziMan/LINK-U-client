@@ -130,11 +130,13 @@ export default function InvitationComponent({
             ...oldData,
             pages: oldData.pages.map((page: pageType, index: number) => {
               if (index === 0 && newComment.status === '200') {
+                const updatedComments = [newComment.data, ...page.data.comments]
                 return {
                   ...page,
                   data: {
                     ...page.data,
-                    comments: [newComment.data, ...page.data.comments],
+                    nextCursor: updatedComments[updatedComments.length - 2].id,
+                    comments: updatedComments.slice(0, 3),
                   },
                 }
               }
