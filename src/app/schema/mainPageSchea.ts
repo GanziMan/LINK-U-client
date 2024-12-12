@@ -39,6 +39,28 @@ export interface commentDataType {
   date: string
 }
 
+type Comment = {
+  name: string
+  comment: string
+  date: string
+}
+
+type PageDataType = {
+  comments: Comment[]
+  nextCursor: number
+  totalPages: number
+}
+
+export type InfiniteQueryResult = {
+  pages: pageType[]
+  pageParams: (string | number | null)[] // 페이지 매개변수 (필요에 따라 구체적으로 지정 가능)
+}
+
+export type pageType = {
+  data: PageDataType
+  status: '200' | '400'
+}
+
 export const GroomAccountInfo: AccountInfoType[] = [
   {
     position: '신랑',
