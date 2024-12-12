@@ -5,7 +5,6 @@ import { PrismaClient } from '@prisma/client'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
-import { z } from 'zod'
 import { PageCommentRequest, pageCommentsSchema } from './schema'
 
 // 플러그인 로드
