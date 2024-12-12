@@ -27,6 +27,7 @@ export async function createComment(
   })
 
   const formattedCreateData: commentDataType = {
+    id: createData.id,
     name: createData.name,
     comment: createData.comment,
     date: createData.createdAt.toISOString(),

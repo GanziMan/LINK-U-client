@@ -34,19 +34,14 @@ export interface LinkType {
 }
 
 export interface commentDataType {
-  name: string
-  comment: string
-  date: string
-}
-
-type Comment = {
+  id: number
   name: string
   comment: string
   date: string
 }
 
 type PageDataType = {
-  comments: Comment[]
+  comments: commentDataType[]
   nextCursor: number
   totalPages: number
 }

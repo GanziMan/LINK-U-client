@@ -26,6 +26,7 @@ export default function CommentForm({
             status: string
             data: {
               comments: {
+                id: number
                 name: string
                 comment: string
                 date: string

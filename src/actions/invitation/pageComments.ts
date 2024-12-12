@@ -31,12 +31,6 @@ export async function pageComments(request: PageCommentRequest) {
     skip: cursor !== 0 ? 1 : 0,
     cursor: cursor ? { id: cursor } : undefined,
     take: 3,
-    select: {
-      id: true,
-      name: true,
-      comment: true,
-      createdAt: true,
-    },
   })
 
   const totalComments = await prisma.comments.count()
@@ -44,6 +38,7 @@ export async function pageComments(request: PageCommentRequest) {
 
   const formattedData = data.map((comment) => {
     return {
+      id: comment.id,
       name: comment.name,
       comment: comment.comment,
       date: dayjs(comment.createdAt).format('YYYY-MM-DD HH:mm:ss'),
