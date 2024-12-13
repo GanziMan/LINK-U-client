@@ -82,13 +82,12 @@ export default function CommentForm({
               <hr />
             </div>
           ))}
-
-        <PaginationComponent
-          count={commentPage?.pages[0]?.data?.totalPages!}
-          page={currentPage}
-          onChange={handlePageChange}
-        />
       </CommentContainer>
+      <PaginationComponent
+        count={commentPage?.pages[0]?.data?.totalPages!}
+        page={currentPage}
+        onChange={handlePageChange}
+      />
     </Box>
   )
 }

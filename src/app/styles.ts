@@ -192,7 +192,7 @@ export const CommentContainer = styled(Box)(() => {
     flexDirection: 'column',
     gap: '20px',
     width: '100%',
-    height: 350,
+    height: 300,
   }
 })
 

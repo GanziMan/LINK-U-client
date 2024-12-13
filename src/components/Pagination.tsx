@@ -15,11 +15,6 @@ export default function PaginationComponent({
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        position: 'absolute',
-        bottom: 5,
-        textAlign: 'center',
-        left: '50%',
-        transform: 'translateX(-50%)',
       }}
     >
       <Pagination
