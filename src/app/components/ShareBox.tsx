@@ -14,7 +14,7 @@ export default function LikeBox({
     try {
       if (typeof window !== 'undefined')
         await navigator.clipboard.writeText(window.location.href)
-      enqueueSnackbar<'success'>('모바일 청첩장 URL이 복사되었습니다!', {
+      enqueueSnackbar<'success'>('URL 복사되었습니다.', {
         variant: 'success',
       })
     } catch (err) {

@@ -5,8 +5,8 @@ import { getCount } from '@/actions/invitation/getCount'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - 모바일 커플 청첩장',
-    default: 'LINK-U',
+    template: '%s - 링쿠',
+    default: '링쿠',
   },
 
   verification: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
       'naver-site-verification': '5576aaadf8cd2fc333025e72c60e487ccc16869f',
     },
   },
-  applicationName: 'LINK-U',
+  applicationName: '링쿠',
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
@@ -27,10 +27,10 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
-  keywords: ['청첩장', '모바일 청첩장', '연인 청첩장', '커플 청첩장'],
+  description: '여자친구와 기념을 위해 만든 모바일 청첩장 링쿠입니다.',
+  keywords: ['링쿠', '청첩장', '모바일 청첩장', '연인 청첩장', '커플 청첩장'],
   openGraph: {
-    title: '모바일 커플 청첩장',
+    title: '링쿠',
     description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
     url: 'https://link-u.shop',
     type: 'website',

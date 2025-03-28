@@ -22,7 +22,7 @@ export default function ShareKakao({
     window.Kakao?.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: 'LINK-U',
+        title: '링쿠',
         description: '결혼식을 초대합니다.',
         imageUrl:
           'https://ilotteshopping.com/myweddingstyle/image/main/img3.png',

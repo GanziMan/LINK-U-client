@@ -6,17 +6,17 @@ import { RootLayoutProps } from './schema/mainPageSchea'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - 모바일 커플 청첩장',
-    default: 'LINK-U',
+    template: '%s - 링쿠',
+    default: '링쿠',
   },
-  description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
+  description: '여자친구와 기념을 위해 만든 모바일 청첩장 링쿠입니다.',
   verification: {
     google: 'Zl29et0mZnPrc2Zjwn8RJ3vjPez_FzrfQmrle9GuAbM',
     other: {
       'naver-site-verification': '5576aaadf8cd2fc333025e72c60e487ccc16869f',
     },
   },
-  applicationName: 'LINK-U',
+  applicationName: '링쿠',
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  keywords: ['청첩장', '모바일 청첩장', '연인 청첩장', '커플 청첩장'],
+  keywords: ['링쿠', '청첩장', '모바일 청첩장', '연인 청첩장', '커플 청첩장'],
   openGraph: {
-    title: '모바일 커플 청첩장',
+    title: '링쿠',
     description: '여자친구와 기념을 위해 만든 모바일 청첩장 사이트입니다.',
     url: 'https://link-u.shop',
     type: 'website',
@@ -79,6 +79,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="naver-site-verification"
+          content="c57cd7fa641b858bc50a2a1b892d53b77354a329"
+        />
         {/* sdk */}
         <Script
           type="text/javascript"
