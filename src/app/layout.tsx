@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   creator: 'dev Bum',
   publisher: 'dev Bum',
   robots: {
-    index: false,
+    index: true,
     follow: true,
     nocache: true,
     googleBot: {
-      index: false,
+      index: true,
       follow: true,
     },
   },
