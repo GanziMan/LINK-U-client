@@ -37,12 +37,6 @@ export const metadata: Metadata = {
   },
 }
 
-declare global {
-  interface Window {
-    Kakao: any
-  }
-}
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
