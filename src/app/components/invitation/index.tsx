@@ -182,7 +182,7 @@ export default function InvitationComponent({
           2025년 02월 15일(토)
           <Image
             src={'/images/wedding/wedding-3.jpeg'}
-            alt=""
+            alt="wedding-3"
             width={328}
             height={328}
             style={{
